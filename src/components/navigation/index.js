@@ -10,7 +10,7 @@ const Navigation = () => {
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <Link href="https://flowbite.com/" className="flex items-center">
           <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
-            Help'em
+            Help&apos;em
           </span>
         </Link>
         <div className="flex md:order-2">
