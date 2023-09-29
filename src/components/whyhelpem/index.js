@@ -12,7 +12,7 @@ const WhyHelpEm = () => {
       <br />
       <br />
       <br />
-      <div class=" w-4/5  grid md:grid-cols-3 grid-cols-1 flex flex-col justify-center items-center ">
+      <div class="  grid md:grid-cols-3 grid-cols-1 flex flex-col justify-center items-center ">
         <div className="py-4 flex flex-col justify-center items-center text-center">
           <div className="flex flex-col justify-center items-center">
             <GiFoodTruck size="5em" />

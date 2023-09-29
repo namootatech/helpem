@@ -3,23 +3,15 @@
 const Mission = () => {
   return (
     <div className="container">
-      <div class="grid grid-flow-col auto-cols-max">
-        <div className="h-full px-4 py-4 hidden md:block">
-          <Image
-            src="/images/mission.jpg"
-            alt="Picture of the author"
-            width={500}
-            height={500}
-            className="h-auto max-w-lg ml-auto"
-          />
-        </div>
-        <div className="h-full w-1/4 px-4 py-4 text-center md:text-left">
+      <div class="grid md:grid-cols-2 grid-cols-1">
+        <div className="bg-[url('/images/mission.jpg')] bg-cover h-96 md:h-full"></div>
+        <div className="h-full px-8 py-8 text-center md:text-left">
           <h2 className="text-red-700 text-4xl mb-4 font-extrabold leading-none tracking-tight text-gray-900 dark:text-white">
             Our Mission
           </h2>
           <p className=" text-base/loose text-2xl md:text-2xl lg:text-2xl dark:text-white mb-4">
-            Help&apos;em is an initiative by Food on Every Table NPO, dedicated to
-            eradicating hunger in Africa. We believe that no one should go to
+            Help&apos;em is an initiative by Food on Every Table NPO, dedicated
+            to eradicating hunger in Africa. We believe that no one should go to
             bed hungry, and we're committed to making a positive change.
           </p>
           <h2 className="text-red-700 text-4xl mb-4 font-extrabold leading-none tracking-tight text-gray-900 dark:text-white">
