@@ -18,7 +18,7 @@ const Mission = () => {
             Our Mission
           </h2>
           <p className=" text-base/loose text-2xl md:text-2xl lg:text-2xl dark:text-white mb-4">
-            Help'em is an initiative by Food on Every Table NPO, dedicated to
+            Help&apos;em is an initiative by Food on Every Table NPO, dedicated to
             eradicating hunger in Africa. We believe that no one should go to
             bed hungry, and we're committed to making a positive change.
           </p>
@@ -26,7 +26,7 @@ const Mission = () => {
             How You Can Help
           </h2>
           <p className="text-base/loose text-2xl md:text-2xl lg:text-2xl dark:text-white mb-4">
-            Subscribe to Help'em and become part of our community of
+            Subscribe to Help&apos;em and become part of our community of
             change-makers. By subscribing, you not only help us manufacture food
             bars but also participate in distributing them to the most
             vulnerable communities across Africa.

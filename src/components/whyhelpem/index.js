@@ -7,7 +7,7 @@ const WhyHelpEm = () => {
   return (
     <div className="h-full w-full px-10 py-10 px-10 text-center md:text-left bg-red-700 text-gray-100 text-center">
       <h2 className=" text-6xl mb-4 text-center mt-4 font-extrabold leading-none tracking-tight dark:text-white">
-        Why Help'em
+        Why Help&apos;em
       </h2>
       <br />
       <br />
