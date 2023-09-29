@@ -4,7 +4,7 @@ const Mission = () => {
   return (
     <div className="container">
       <div class="grid grid-flow-col auto-cols-max">
-        <div className="h-full px-4 py-4">
+        <div className="h-full px-4 py-4 hidden md:block">
           <Image
             src="/images/mission.jpg"
             alt="Picture of the author"
@@ -13,7 +13,7 @@ const Mission = () => {
             className="h-auto max-w-lg ml-auto"
           />
         </div>
-        <div className="h-full w-1/4 px-4 py-4">
+        <div className="h-full w-1/4 px-4 py-4 text-center md:text-left">
           <h2 className="text-red-700 text-4xl mb-4 font-extrabold leading-none tracking-tight text-gray-900 dark:text-white">
             Our Mission
           </h2>
