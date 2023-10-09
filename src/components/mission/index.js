@@ -3,7 +3,7 @@
 const Mission = () => {
   return (
     <div className="container">
-      <div class="grid md:grid-cols-2 grid-cols-1">
+      <div className="grid md:grid-cols-2 grid-cols-1">
         <div className="bg-[url('/images/mission.jpg')] bg-cover h-96 md:h-full"></div>
         <div className="h-full px-8 py-8 text-center md:text-left">
           <h2 className="text-red-700 text-4xl mb-4 font-extrabold leading-none tracking-tight text-gray-900 dark:text-white">
