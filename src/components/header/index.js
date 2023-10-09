@@ -23,7 +23,7 @@ const Header = () => {
           </button>
         </div>
         <div className="white-text h-96 md:h-full px-8 py-8 text-center md:text-left">
-            <h2 className=" text-6xl mb-4 text-center mt-4 font-extrabold leading-none tracking-tight dark:text-white">
+            <h2 className="hero-section text-6xl mb-4 text-center mt-4 font-extrabold leading-none tracking-tight dark:text-white">
               Feeding Hope<br/><span >in Africa</span>
             </h2>
         </div>
