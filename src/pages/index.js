@@ -5,6 +5,7 @@ import Mission from '@/components/mission';
 import WhyHelpEm from '@/components/whyhelpem';
 import GetInvolved from '@/components/getInvolved';
 import Header from '@/components/header';
+
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {

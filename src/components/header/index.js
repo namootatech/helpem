@@ -2,11 +2,11 @@ import Image from 'next/image';
 
 const Header = () => {
   return (
-    <div className="bg-[url('/images/bgkids.png')] bg-cover container">
-      <div className="grid md:grid-cols-2 grid-cols-1">
-        <div className="h-full px-8 py-8 text-center md:text-left ">
+    <div className="container h-full home-page-header flex flex-col justify-center items-center">
+      <div className="grid md:grid-cols-2 grid-cols-1 flex flex-col justify-center items-center">
+        <div className="h-full px-8 py-8 text-center md:text-left">
           <h1 className="white-text text-red-700 text-4xl mb-4 font-extrabold leading-none tracking-tight text-gray-900 dark:text-white">
-            17,567,723
+            5,342
           </h1>
           <h2 className="white-text text-4xl mb-4 font-extrabold leading-none tracking-tight text-gray-900 dark:text-white">
             Food bars Handed out
@@ -23,7 +23,7 @@ const Header = () => {
           </button>
         </div>
         <div className="white-text h-96 md:h-full px-8 py-8 text-center md:text-left">
-            <h2 className="hero-section text-6xl mb-4 text-center mt-4 font-extrabold leading-none tracking-tight dark:text-white">
+            <h2 className="hero-section text-6xl mb-4 text-right mt-4 font-extrabold leading-none tracking-tight dark:text-white">
               Feeding Hope<br/><span >in Africa</span>
             </h2>
         </div>
