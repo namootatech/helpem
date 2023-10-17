@@ -50,19 +50,19 @@ const SubscriptionForm = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto bg-white rounded-lg shadow-md">
-      <h1 className="text-2xl font-semibold mb-4">
+    <div className="md:w-9/12 p-8 mx-auto bg-white rounded-lg shadow-md">
+      <h1 className="text-2xl font-semibold mb-4 text-4xl">
         Join Help'em - Be a Hope Builder!
       </h1>
-      <p className="mb-4 mt-2">
+      <p className="mb-4 mt-2 text-2xl">
         Subscribe to Help'em, and join us in our mission to end hunger in
         Africa. Choose a subscription tier and start making a real difference
         today.
       </p>
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="my-12">
         <div className="mb-4">
-          <label htmlFor="subscription-tier" className="block font-semibold">
+          <label htmlFor="subscription-tier" className="text-xl block font-semibold">
             Select Your Subscription Tier:
           </label>
           <select
@@ -101,7 +101,7 @@ const SubscriptionForm = () => {
         </div>
 
         <div className="mb-4">
-          <label htmlFor="name" className="block font-semibold">
+          <label htmlFor="name" className=" text-xl block font-semibold">
             Your Name:
           </label>
           <input
@@ -115,7 +115,7 @@ const SubscriptionForm = () => {
         </div>
 
         <div className="mb-4">
-          <label htmlFor="email" className="block font-semibold">
+          <label htmlFor="email" className="text-xl block font-semibold">
             Your Email:
           </label>
           <input
@@ -130,7 +130,7 @@ const SubscriptionForm = () => {
         </div>
 
         <div className="mb-4">
-          <label htmlFor="password" className="block font-semibold">
+          <label htmlFor="password" className="text-xl block font-semibold">
             Password:
           </label>
           <input
@@ -144,7 +144,7 @@ const SubscriptionForm = () => {
         </div>
 
         <div className="mb-4">
-          <label htmlFor="confirmPassword" className="block font-semibold">
+          <label htmlFor="confirmPassword" className="text-xl block font-semibold">
             Confirm Password:
           </label>
           <input
@@ -158,8 +158,8 @@ const SubscriptionForm = () => {
           {passwordError && <p className="text-red-500">{passwordError}</p>}
         </div>
 
-        <div className="mb-4">
-          <label className="block font-semibold">Payment Method:</label>
+        <div className="mb-4 my-4">
+          <label className="text-xl block font-semibold">Payment Method:</label>
           <div className="flex items-center">
             <input
               type="radio"
@@ -170,7 +170,7 @@ const SubscriptionForm = () => {
               onChange={handleInputChange}
               checked={formData.paymentMethod === "credit-card"}
             />
-            <label htmlFor="credit-card">Credit Card</label>
+            <label htmlFor="credit-card"  className="text-xl block font-semibold">Credit Card</label>
           </div>
           <div className="flex items-center">
             <input
@@ -182,11 +182,11 @@ const SubscriptionForm = () => {
               onChange={handleInputChange}
               checked={formData.paymentMethod === "paypal"}
             />
-            <label htmlFor="paypal">PayPal</label>
+            <label htmlFor="paypal"  className="text-xl block font-semibold">PayPal</label>
           </div>
         </div>
 
-        <div class="flex items-start mb-6">
+        <div class="flex items-start mb-6 my-6">
           <div class="flex items-center h-5 mb-4">
             <input
               type="checkbox"
@@ -194,13 +194,13 @@ const SubscriptionForm = () => {
               name="agreeToTerms"
               checked={formData.agreeToTerms}
               onChange={handleInputChange}
-              class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800"
+              class="w-7 h-7 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800"
               required
             />
           </div>
           <label
             for="terms"
-            class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+            class="ml-2 text-xl font-medium text-gray-900 dark:text-gray-300"
           >
             I agree with the{" "}
             <Link
@@ -219,10 +219,10 @@ const SubscriptionForm = () => {
           Subscribe
         </button>
       </form>
-      <p className="mb-4 mt-4">
+      <p className="mb-4 mt-4 text-2xl mt-4">
         When you subscribe, you'll become a Hope Builder. Here's how it works:
       </p>
-      <ul className="list-disc ml-6">
+      <ul className="list-disc ml-6 text-2xl">
         <li>
           Your recruits pay a monthly subscription fee, depending on the package
           they have selected.
@@ -238,7 +238,7 @@ const SubscriptionForm = () => {
         <li>10% goes toward the system as Monthly Income Toward the System.</li>
       </ul>
 
-      <p className="mt-4">
+      <p className="mt-4 text-2xl">
         Your subscription is more than a commitment; it's a promise of hope.
         Join us today and help us create a world where no one goes to bed
         hungry.
