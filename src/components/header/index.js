@@ -5,11 +5,11 @@ const Header = () => {
     <div className="container h-full home-page-header flex flex-col justify-center items-center">
       <div className="grid md:grid-cols-2 grid-cols-1 flex flex-col justify-center items-center">
         <div className="h-full px-8 py-8 text-center md:text-left">
-          <h1 className="white-text text-red-700 text-4xl mb-4 font-extrabold leading-none tracking-tight text-gray-900 dark:text-white">
-            5,342
+          <h1 className="white-text text-red-700 text-6xl mb-4 font-extrabold leading-none tracking-tight text-gray-900 dark:text-white">
+          Feeding Hope in Africa
           </h1>
           <h2 className="white-text text-4xl mb-4 font-extrabold leading-none tracking-tight text-gray-900 dark:text-white">
-            Food bars Handed out
+          5,342 Food bars Handed out
           </h2>
           <p className="text-white text-base/loose text-2xl md:text-2xl lg:text-2xl dark:text-white mb-4">
             At Help&apos;em, we believe in the power of community and technology coming together to make a difference. 
@@ -21,11 +21,6 @@ const Header = () => {
           >
             Become a member
           </button>
-        </div>
-        <div className="white-text h-96 md:h-full px-8 py-8 text-center md:text-left">
-            <h2 className="hero-section text-6xl mb-4 text-right mt-4 font-extrabold leading-none tracking-tight dark:text-white">
-              Feeding Hope<br/><span >in Africa</span>
-            </h2>
         </div>
       </div>
     </div>

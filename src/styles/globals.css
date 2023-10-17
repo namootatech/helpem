@@ -29,9 +29,15 @@ body {
     margin-top: 60px;
   }
 }
-
 .home-page-header{
-  height:80vh;
   background: url('/images/home-page-header.jpg') no-repeat center center;
   background-size: cover;
+}
+
+@media(min-width:769px){
+  .home-page-header{
+    height:80vh;
+    background: url('/images/home-page-header.jpg') no-repeat center center;
+    background-size: cover;
+  }
 }
