@@ -40,4 +40,8 @@ body {
     background: url('/images/home-page-header.jpg') no-repeat center center;
     background-size: cover;
   }
+
+.section-image{
+  height:35em;
+}
 }

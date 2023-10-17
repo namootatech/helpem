@@ -10,28 +10,25 @@ const WhyHelpEm = () => {
         Why Help&apos;em
       </h2>
       <br />
-      <br />
-      <br />
-      <div className="  grid md:grid-cols-3 grid-cols-1 flex flex-col justify-center items-center ">
+      <div className="  grid md:grid-cols-3 grid-cols-1 flex flex-col justify-center items-center section-image ">
         <div className="py-4 flex flex-col justify-center items-center text-center">
           <div className="flex flex-col justify-center items-center">
             <GiFoodTruck size="5em" />
             <h2 className="text-4xl py-4 font-bold">Impact</h2>
           </div>
 
-          <p className="text-2xl text-base/loose">
+          <p className="text-2xl text-base/loose md:text-4xl">
             Your subscription directly translates into meals for those in need.
           </p>
         </div>
-        <div className="py-4 flex flex-col justify-center items-center text-center">
+        <div className="py-2 flex flex-col justify-center items-center text-center">
           <div className="flex flex-col justify-center items-center">
             <BsBook size="5em" />
             <h2 className="text-4xl py-4 font-bold">Transparency</h2>
           </div>
 
-          <p className="text-2xl text-base/loose w-4/5">
-            We are committed to complete transparency in our operations and how
-            your contributions are used.
+          <p className="text-2xl text-base/loose w-4/5 md:text-4xl">
+            We offer complete transparency in our operations 
           </p>
         </div>
         <div className=" py-4 flex flex-col justify-center items-center text-center">
@@ -40,7 +37,7 @@ const WhyHelpEm = () => {
             <h2 className="text-4xl py-4 font-bold">Community</h2>
           </div>
 
-          <p className="text-2xl text-base/loose">
+          <p className="text-2xl text-base/loose md:text-4xl">
             Join a passionate community of individuals dedicated to ending
             hunger in Africa.
           </p>

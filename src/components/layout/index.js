@@ -5,8 +5,6 @@ const Layout = ({children}) => {
       <div>
         <Navigation />
         <main className="container mx-auto mt-20">{children}</main>
-        <br />
-        <br />
         <Footer />
       </div>
     );

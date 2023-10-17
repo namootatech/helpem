@@ -28,7 +28,7 @@ const GetInvolved = () => {
             Subscribe
           </Link>
         </div>
-        <div className="bg-[url('/images/getinvolved.jpg')] bg-cover h-96 md:h-full"></div>
+        <div className="bg-[url('/images/getinvolved.jpg')] bg-cover h-96 section-image"></div>
       </div>
     </div>
   );
