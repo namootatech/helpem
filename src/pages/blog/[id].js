@@ -25,7 +25,7 @@ export default function Post({ postData }) {
   console.log(postData)
   return (
     <Layout>
-       <div className="container mt-4 px-16 py-20">
+       <div className="container mt-4 px-8 py-10">
       <div className={styles.blog}
         dangerouslySetInnerHTML={{ __html: postData.content }}
       />
