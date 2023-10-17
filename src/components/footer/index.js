@@ -1,3 +1,4 @@
+import Link from 'next/link'
 const Footer = () => {
   return (
     <footer class="bg-red-800 text-white dark:bg-red-900 py-8">
@@ -62,9 +63,9 @@ const Footer = () => {
                   </a>
                 </li>
                 <li>
-                  <a href="#" class="hover:underline">
+                  <Link href="/terms" class="hover:underline">
                     Terms &amp; Conditions
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
