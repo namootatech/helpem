@@ -1,5 +1,5 @@
  import Image from 'next/image';
-
+ import Link from "next/link";
 const Mission = () => {
   return (
     <div className="container">
@@ -23,12 +23,12 @@ const Mission = () => {
             bars but also participate in distributing them to the most
             vulnerable communities across Africa.
           </p>
-          <button
-            type="button"
+          <Link
+            href="/subscribe"
             className=" px-6 py-3.5 text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
           >
             Subscribe
-          </button>
+          </Link>
         </div>
       </div>
     </div>

@@ -1,5 +1,5 @@
  import Image from 'next/image';
-
+ import Link from "next/link";
 const GetInvolved = () => {
   return (
     <div className="container">
@@ -21,12 +21,12 @@ const GetInvolved = () => {
             also hope to those who need it most. Join us in our mission to put
             food on every table in Africa.
           </p>
-          <button
-            type="button"
+          <Link
+            href="/subscribe"
             className=" px-6 py-3.5 text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
           >
             Subscribe
-          </button>
+          </Link>
         </div>
         <div className="bg-[url('/images/getinvolved.jpg')] bg-cover h-96 md:h-full"></div>
       </div>
