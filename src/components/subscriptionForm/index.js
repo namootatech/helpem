@@ -6,6 +6,8 @@ import { keys } from "ramda";
 import moment from "moment";
 
 const PAYFAST_URL = process.env.NEXT_PUBLIC_PAYFAST_URL;
+const WEBSITE_URL = process.env.NEXT_PUBLIC_WEBSITE_URL;
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 const levelPrices = {
   Nourisher: 50,
@@ -50,9 +52,9 @@ const SubscriptionForm = () => {
     postToURL(PAYFAST_URL, {
       merchant_id: 10029504,
       merchant_key: "whmgupmdjth7o",
-      return_url: `http://localhost:3000/subscribe/return?subscriptionTier=${formData.subscriptionTier}&firstName=${formData.firstName}&lastName=${formData.lastName}&email=${formData.email}&paymentMethod=${formData.paymentMethod}&agreeToTerms=${formData.agreeToTerms}&password=${formData.password}&confirmPassword=${formData.confirmPassword}&paymentId=${paymentId}&level=${keys(levelPrices).indexOf(formData.subscriptionTier) + 1}`,
-      cancel_url:"http://localhost:3000/subscribe/cancel",
-      notify_url: "https://helpem-api.onrender.com/api/notify",
+      return_url: `${WEBSITE_URL}/subscribe/return?subscriptionTier=${formData.subscriptionTier}&firstName=${formData.firstName}&lastName=${formData.lastName}&email=${formData.email}&paymentMethod=${formData.paymentMethod}&agreeToTerms=${formData.agreeToTerms}&password=${formData.password}&confirmPassword=${formData.confirmPassword}&paymentId=${paymentId}&level=${keys(levelPrices).indexOf(formData.subscriptionTier) + 1}`,
+      cancel_url:`${WEBSITE_URL}/subscribe/cancel`,
+      notify_url: `${API_URL}/notify`,
       name_first: formData.firstName,
       name_last: formData.lastName,
       email_address: formData.email,
