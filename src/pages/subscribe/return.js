@@ -39,7 +39,7 @@ export default function ReturnPage() {
   }, [userData]);
 
   const copyToClipboard = (text) =>{
-    navigator.clipboard.writeText(text)}
+    navigator.clipboard.writeText(text)
     toast.success("Copied to clipboard !", {
       position: toast.POSITION.TOP_CENTER,
     });
