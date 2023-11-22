@@ -1,11 +1,10 @@
-import Image from "next/image";
-import { Inter } from "next/font/google";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Layout from "@/components/layout";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { isEmpty, omit } from "ramda";
-const inter = Inter({ subsets: ["latin"] });
+import { isEmpty } from "ramda";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -39,22 +38,16 @@ export default function ReturnPage() {
     }
   }, [userData]);
 
-  function copy() {
-    // Get the text field
-    var copyText = document.getElementById("copy");
-
-    // Select the text field
-    copyText.select();
-    copyText.setSelectionRange(0, 99999); // For mobile devices
-
-    // Copy the text inside the text field
-    navigator.clipboard.writeText(copyText.value);
-
-    // Alert the copied text
-    alert("Copied the text: " + copyText.value);
+  const copyToClipboard = (text) =>{
+    navigator.clipboard.writeText(text)}
+    toast.success("Copied to clipboard !", {
+      position: toast.POSITION.TOP_CENTER,
+    });
   }
+  
   return (
     <Layout>
+      <ToastContainer />
       {success && (
         <div class="max-w-2xl mx-auto p-4 bg-white rounded-lg ">
           <h1 class="text-3xl font-bold mb-4">
@@ -152,19 +145,20 @@ export default function ReturnPage() {
             <p className="mt-4 mb-4">
               We were unable to process your subscription.
             </p>
-            <p className="mt-4 mb-4">Your transaction number is :</p>
+            <p className="mt-4 mb-4">Your reference number is :</p>
             <div class="flex flex-wrap -mx-3 mb-6">
               <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                 <input
                   type="text"
                   value={userData.paymentId}
                   id="copy"
+                  disabled
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 />
               </div>
               <div class="w-full md:w-1/2 px-3">
                 <button
-                  onClick={copy}
+                  onClick={() => copyToClipboard(userData.paymentId)}
                   className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                 >
                   Copy text

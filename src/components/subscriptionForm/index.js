@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import postPaymentToPayFast, { postToURL } from "../payfast/payfast";
+import { postToURL } from "../payfast/payfast";
 import { v4 as uuidv4 } from 'uuid';
 import { keys } from "ramda";
 import moment from "moment";
+
+const PAYFAST_URL = process.env.NEXT_PUBLIC_PAYFAST_URL;
 
 const levelPrices = {
   Nourisher: 50,
@@ -28,7 +27,6 @@ const SubscriptionForm = () => {
     email: null,
     password: null,
     confirmPassword: null,
-    paymentMethod: "credit-card",
     agreeToTerms: false,
     subscriptionTier: "Nourisher",
   });
@@ -46,15 +44,10 @@ const SubscriptionForm = () => {
     });
   };
 
-  const handleShowAlert = (type, title, message) => {
-    showAlert(type, title, message);
-  };
-
-  
   const handleSubmit = (e) => {
     e.preventDefault();
     const paymentId = uuidv4();
-    postToURL("https://sandbox.payfast.co.za/eng/process", {
+    postToURL(PAYFAST_URL, {
       merchant_id: 10029504,
       merchant_key: "whmgupmdjth7o",
       return_url: `http://localhost:3000/subscribe/return?subscriptionTier=${formData.subscriptionTier}&firstName=${formData.firstName}&lastName=${formData.lastName}&email=${formData.email}&paymentMethod=${formData.paymentMethod}&agreeToTerms=${formData.agreeToTerms}&password=${formData.password}&confirmPassword=${formData.confirmPassword}&paymentId=${paymentId}&level=${keys(levelPrices).indexOf(formData.subscriptionTier) + 1}`,
@@ -86,7 +79,6 @@ const SubscriptionForm = () => {
   };
 
   useEffect(() => {
-    // Check if the email is in the correct format
     const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     if (!emailPattern.test(formData.email) && email !== null) {
       setEmailError("Please enter a valid email address.");
@@ -119,7 +111,6 @@ const SubscriptionForm = () => {
   });
   return (
     <div className="md:w-9/12 p-8 mx-auto bg-white rounded-lg shadow-md">
-      <ToastContainer />
       <h1 className="text-2xl font-semibold mb-4 text-4xl">
         Join Help'em - Be a Hope Builder!
       </h1>
@@ -245,41 +236,6 @@ const SubscriptionForm = () => {
             onChange={handleInputChange}
           />
           {passwordError && <p className="text-red-500">{passwordError}</p>}
-        </div>
-
-        <div className="mb-4 my-4">
-          <label className="text-xl block font-semibold">Payment Method:</label>
-          <div className="flex items-center">
-            <input
-              type="radio"
-              id="credit-card"
-              name="paymentMethod"
-              value="credit-card"
-              className="mr-2"
-              onChange={handleInputChange}
-              checked={formData.paymentMethod === "credit-card"}
-            />
-            <label
-              htmlFor="credit-card"
-              className="text-xl block font-semibold"
-            >
-              Credit Card
-            </label>
-          </div>
-          <div className="flex items-center">
-            <input
-              type="radio"
-              id="paypal"
-              name="paymentMethod"
-              value="paypal"
-              className="mr-2"
-              onChange={handleInputChange}
-              checked={formData.paymentMethod === "paypal"}
-            />
-            <label htmlFor="paypal" className="text-xl block font-semibold">
-              PayPal
-            </label>
-          </div>
         </div>
 
         <div className="flex items-start mb-6 my-6">
