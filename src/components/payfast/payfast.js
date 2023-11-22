@@ -117,7 +117,6 @@ export function postToURL(url, values) {
     }
   }
   document.body.appendChild(form);
-  console.log(form);
   form.submit();
   document.body.removeChild(form);
 }
@@ -179,7 +178,7 @@ function quickPostPaymentToPayFast(payFastUrl) {
 }
 
 function postPaymentToPayFast(
-  payFastUrl,
+  {payFastUrl,
   merchantId,
   merchantKey,
   returnUrl,
@@ -193,7 +192,7 @@ function postPaymentToPayFast(
   itemName,
   itemDescription,
   emailConfirmation,
-  confirmationAddress
+  confirmationAddress}
 ) {
   // Sandbox merchant.
   if (merchantId == "10000100") {

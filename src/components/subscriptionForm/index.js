@@ -3,10 +3,26 @@ import Link from "next/link";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import postPaymentToPayFast, { postToURL } from "../payfast/payfast";
+import { v4 as uuidv4 } from 'uuid';
+
+const levelPrices = {
+  Nourisher: 50,
+  CaringPartner: 100,
+  HarmonyAdvocate: 200,
+  UnitySupporter: 300,
+  HopeBuilder: 500,
+  CompassionAmbassador: 1000,
+  LifelineCreator: 2000,
+  EmpowermentLeader: 3000,
+  SustainabilityChampion: 5000,
+  GlobalImpactVisionary: 10000,
+};
 
 const SubscriptionForm = () => {
   const [formData, setFormData] = useState({
-    name: "",
+    firstName: "",
+    lastName: "",
     email: null,
     password: null,
     confirmPassword: null,
@@ -32,28 +48,44 @@ const SubscriptionForm = () => {
     showAlert(type, title, message);
   };
 
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     const API_URL = process.env.NEXT_PUBLIC_API_URL;
-    if (canSubmit) {
-      axios
-        .post(`${API_URL}/register`, formData)
-        .then((res) => {
-          console.log("Response:", res);
-        })
-        .catch((err) => {
-          toast.error('Something went wrong. Please try again.', {
-            position: "top-center",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-            });
-        });
-    }
+    const paymentId = uuidv4();
+    postToURL("https://sandbox.payfast.co.za/eng/process", {
+      merchant_id: 10029504,
+      merchant_key: "whmgupmdjth7o",
+      return_url: `http://localhost:3000/subscribe/return?subscriptionTier=${formData.subscriptionTier}&firstName=${formData.firstName}&lastName=${formData.lastName}&email=${formData.email}&paymentMethod=${formData.paymentMethod}&agreeToTerms=${formData.agreeToTerms}&password=${formData.password}&confirmPassword=${formData.confirmPassword}&paymentId=${paymentId}`,
+      cancel_url:"http://localhost:3000/subscribe/cancel",
+      notify_url: "http://localhost:3000/subscribe/notify",
+      name_first: formData.firstName,
+      name_last: formData.lastName,
+      email_address: formData.email,
+      m_payment_id: paymentId,
+      amount: levelPrices[formData.subscriptionTier],
+      item_name: `Helpem Subscription`,
+      item_description: `Helpem Subscription for ${formData.firstName} ${formData.lastName} for the ${formData.subscriptionTier} package.`,
+    });
+    // if (canSubmit) {
+    //   axios
+    //     .post(`${API_URL}/register`, formData)
+    //     .then((res) => {
+    //       console.log("Response:", res);
+    //     })
+    //     .catch((err) => {
+    //       toast.error('Something went wrong. Please try again.', {
+    //         position: "top-center",
+    //         autoClose: 5000,
+    //         hideProgressBar: false,
+    //         closeOnClick: true,
+    //         pauseOnHover: true,
+    //         draggable: true,
+    //         progress: undefined,
+    //         theme: "light",
+    //         });
+    //     });
+    // }
   };
 
   const toggleTerms = () => {
@@ -69,30 +101,31 @@ const SubscriptionForm = () => {
     if (!emailPattern.test(formData.email) && email !== null) {
       setEmailError("Please enter a valid email address.");
       setCanSubmit(false);
-    }
-    else{
+    } else {
       setEmailError("");
     }
 
     if (formData.password !== formData.confirmPassword) {
       setPasswordError("Passwords do not match.");
       setCanSubmit(false);
-    } 
-    else{
+    } else {
       setPasswordError("");
     }
-    
+
     if (formData.agreeToTerms === false) {
       setTermsError("You must agree to the terms and conditions.");
       setCanSubmit(false);
-     }
-     else{
+    } else {
       setTermsError("");
-     }
-     
-     if(formData.agreeToTerms === true && formData.password === formData.confirmPassword && emailPattern.test(formData.email)){
+    }
+
+    if (
+      formData.agreeToTerms === true &&
+      formData.password === formData.confirmPassword &&
+      emailPattern.test(formData.email)
+    ) {
       setCanSubmit(true);
-     }
+    }
   });
   return (
     <div className="md:w-9/12 p-8 mx-auto bg-white rounded-lg shadow-md">
@@ -150,13 +183,27 @@ const SubscriptionForm = () => {
         </div>
 
         <div className="mb-4">
-          <label htmlFor="name" className=" text-xl block font-semibold">
-            Your Name:
+          <label htmlFor="firstName" className=" text-xl block font-semibold">
+            First Name:
           </label>
           <input
             type="text"
-            id="name"
-            name="name"
+            id="firstName"
+            name="firstName"
+            className="rounded border p-2 w-full"
+            required
+            onChange={handleInputChange}
+          />
+        </div>
+
+        <div className="mb-4">
+          <label htmlFor="lastName" className=" text-xl block font-semibold">
+            Last Name:
+          </label>
+          <input
+            type="text"
+            id="lastName"
+            name="lastName"
             className="rounded border p-2 w-full"
             required
             onChange={handleInputChange}
@@ -165,7 +212,7 @@ const SubscriptionForm = () => {
 
         <div className="mb-4">
           <label htmlFor="email" className="text-xl block font-semibold">
-            Your Email:
+            Email address:
           </label>
           <input
             type="email"
@@ -275,12 +322,26 @@ const SubscriptionForm = () => {
         {termsError && <p className="text-red-500">{termsError}</p>}
         <br />
         {canSubmit && (
+          <>
           <button
             type="submit"
             className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
           >
             Subscribe
           </button>
+          <img
+                              onclick="quickPostPaymentToPayFast(document.getElementById('payfast_url').value);"
+                              src="https://www.payfast.co.za/images/buttons/paynow_basic_logo.gif"
+                              align="bottom"
+                              vspace="3"
+                              width="95"
+                              height="57"
+                              alt="Pay Now"
+                              onClick={handleSubmit}
+                              title="Pay Now with x"
+                            />
+          </>
+
         )}
         {!canSubmit && (
           <button
