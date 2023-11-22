@@ -5,6 +5,8 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import postPaymentToPayFast, { postToURL } from "../payfast/payfast";
 import { v4 as uuidv4 } from 'uuid';
+import { keys } from "ramda";
+import moment from "moment";
 
 const levelPrices = {
   Nourisher: 50,
@@ -28,7 +30,7 @@ const SubscriptionForm = () => {
     confirmPassword: null,
     paymentMethod: "credit-card",
     agreeToTerms: false,
-    subscrptionTier: "Nourisher",
+    subscriptionTier: "Nourisher",
   });
 
   const [emailError, setEmailError] = useState("");
@@ -51,14 +53,13 @@ const SubscriptionForm = () => {
   
   const handleSubmit = (e) => {
     e.preventDefault();
-    const API_URL = process.env.NEXT_PUBLIC_API_URL;
     const paymentId = uuidv4();
     postToURL("https://sandbox.payfast.co.za/eng/process", {
       merchant_id: 10029504,
       merchant_key: "whmgupmdjth7o",
-      return_url: `http://localhost:3000/subscribe/return?subscriptionTier=${formData.subscriptionTier}&firstName=${formData.firstName}&lastName=${formData.lastName}&email=${formData.email}&paymentMethod=${formData.paymentMethod}&agreeToTerms=${formData.agreeToTerms}&password=${formData.password}&confirmPassword=${formData.confirmPassword}&paymentId=${paymentId}`,
+      return_url: `http://localhost:3000/subscribe/return?subscriptionTier=${formData.subscriptionTier}&firstName=${formData.firstName}&lastName=${formData.lastName}&email=${formData.email}&paymentMethod=${formData.paymentMethod}&agreeToTerms=${formData.agreeToTerms}&password=${formData.password}&confirmPassword=${formData.confirmPassword}&paymentId=${paymentId}&level=${keys(levelPrices).indexOf(formData.subscriptionTier) + 1}`,
       cancel_url:"http://localhost:3000/subscribe/cancel",
-      notify_url: "http://localhost:3000/subscribe/notify",
+      notify_url: "https://helpem-api.onrender.com/api/notify",
       name_first: formData.firstName,
       name_last: formData.lastName,
       email_address: formData.email,
@@ -66,26 +67,15 @@ const SubscriptionForm = () => {
       amount: levelPrices[formData.subscriptionTier],
       item_name: `Helpem Subscription`,
       item_description: `Helpem Subscription for ${formData.firstName} ${formData.lastName} for the ${formData.subscriptionTier} package.`,
+      subscription_type: 1,
+      billing_date: moment().format("YYYY-MM-DD"),
+      recurring_amount: levelPrices[formData.subscriptionTier],
+      frequency: 3,
+      cycles: 12,
+      subscription_notify_email: true,
+      subscription_notify_webhook: true,
+      subscription_notify_buyer: true,
     });
-    // if (canSubmit) {
-    //   axios
-    //     .post(`${API_URL}/register`, formData)
-    //     .then((res) => {
-    //       console.log("Response:", res);
-    //     })
-    //     .catch((err) => {
-    //       toast.error('Something went wrong. Please try again.', {
-    //         position: "top-center",
-    //         autoClose: 5000,
-    //         hideProgressBar: false,
-    //         closeOnClick: true,
-    //         pauseOnHover: true,
-    //         draggable: true,
-    //         progress: undefined,
-    //         theme: "light",
-    //         });
-    //     });
-    // }
   };
 
   const toggleTerms = () => {
@@ -329,17 +319,6 @@ const SubscriptionForm = () => {
           >
             Subscribe
           </button>
-          <img
-                              onclick="quickPostPaymentToPayFast(document.getElementById('payfast_url').value);"
-                              src="https://www.payfast.co.za/images/buttons/paynow_basic_logo.gif"
-                              align="bottom"
-                              vspace="3"
-                              width="95"
-                              height="57"
-                              alt="Pay Now"
-                              onClick={handleSubmit}
-                              title="Pay Now with x"
-                            />
           </>
 
         )}
