@@ -8,6 +8,8 @@ import moment from "moment";
 const PAYFAST_URL = process.env.NEXT_PUBLIC_PAYFAST_URL;
 const WEBSITE_URL = process.env.NEXT_PUBLIC_WEBSITE_URL;
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
+const MERCHANT_ID = process.env.NEXT_PUBLIC_MERCHANT_ID;
+const MERCHANT_KEY = process.env.NEXT_PUBLIC_MERCHANT_KEY;
 
 const levelPrices = {
   Nourisher: 50,
@@ -50,8 +52,8 @@ const SubscriptionForm = () => {
     e.preventDefault();
     const paymentId = uuidv4();
     postToURL(PAYFAST_URL, {
-      merchant_id: 10029504,
-      merchant_key: "whmgupmdjth7o",
+      merchant_id: MERCHANT_ID,
+      merchant_key: MERCHANT_KEY,
       return_url: `${WEBSITE_URL}/subscribe/return?subscriptionTier=${formData.subscriptionTier}&firstName=${formData.firstName}&lastName=${formData.lastName}&email=${formData.email}&paymentMethod=${formData.paymentMethod}&agreeToTerms=${formData.agreeToTerms}&password=${formData.password}&confirmPassword=${formData.confirmPassword}&paymentId=${paymentId}&level=${keys(levelPrices).indexOf(formData.subscriptionTier) + 1}`,
       cancel_url:`${WEBSITE_URL}/subscribe/cancel`,
       notify_url: `${API_URL}/notify`,
