@@ -10,10 +10,7 @@ const inter = Inter({ subsets: ['latin'] })
 export default function Home() {
   return (
     <Layout>
-      <Header />
-      <Mission />
-      <WhyHelpEm />
-      <GetInvolved />
+      <h1 className='text-4xl font-bold text-center'>THis website is coming soon</h1>
     </Layout>
   )
 }
