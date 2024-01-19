@@ -1,12 +1,21 @@
 import Layout from "@/components/layout";
 import { connect } from "react-redux";
 import buildArtifacts from '@/components/content/generator';
+import { getThemeConfig } from "@/themes";
 
 export async function getStaticProps({ params }) {
-    const postData = getPostData(params.id);
-    const { id } = context.query;
+    const id = params.id;
     return { props: { id } };
 }
+
+export async function getStaticPaths() {
+   const theme = getThemeConfig();
+   const paths = theme.pages.map(p => ({params: {id :p.id}}))
+    return {
+      paths,
+      fallback: false,
+    };
+  }
 
 function Page(props) {
     let pageId = props.id;
