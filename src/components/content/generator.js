@@ -42,7 +42,7 @@ const articleBuilder = (article) => {
             <div className={`grid md:grid-cols-${elements.length} grid-cols-1`}>
                 {elements.map(e => {
                     console.log(e, "element type", e.type)
-                    return <React.Fragment key={e.type}>{articleElementBuilders[e.type](e)}</React.Fragment>
+                    return articleElementBuilders[e.type](e)
                 })}
             </div>
         </div>
@@ -120,7 +120,7 @@ const builders = {
 }
 
 const buildArtifacts = (artifacts) => {
-    const built = <React.Fragment></React.Fragment>
+    const built = artifacts.map(a => builders[a.type](a))
     return built;
 }
 
