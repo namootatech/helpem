@@ -1,23 +1,26 @@
 import Link from "next/link";
 import { useState } from "react";
+import { connect } from "react-redux";
+import React from "react";
 
-const Navigation = () => {
+const Navigation = ({ theme }) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggleIsOpen = () => setIsOpen(!isOpen);
 
   return (
     <nav className="bg-white dark:bg-gray-900 fixed w-full z-20 top-0 left-0 border-b border-gray-200 dark:border-gray-600">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-        <Link href="/" className="flex items-center">
+        <Link href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
+          <img src={`/images/${theme?.themeName}/logo.png`} class="h-8" alt="Flowbite Logo" />
           <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
-            Help&apos;em
+            {theme?.partnerName}
           </span>
         </Link>
         <div className="flex md:order-2">
           <Link
             type="button"
             href="/subscribe"
-            className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg  text-xl px-4 py-2 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            className={theme?.nav?.ctaClass}
           >
             Get started
           </Link>
@@ -26,7 +29,7 @@ const Navigation = () => {
             href="/login"
             className="text-white bg-black hover:bg-red-800 hidden md:block focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg  text-xl px-4 py-2 text-center ml-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
           >
-           Login
+            Login
           </Link>
           <button
             data-collapse-toggle="navbar-sticky"
@@ -46,74 +49,58 @@ const Navigation = () => {
             >
               <path
                 stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
                 d="M1 1h15M1 7h15M1 13h15"
               />
             </svg>
           </button>
         </div>
         <div
-          className={` ${
-            isOpen ? "" : "hidden"
-          } items-center justify-between  w-full md:flex md:w-auto md:order-1`}
+          className={` ${isOpen ? "" : "hidden"
+            } items-center justify-between  w-full md:flex md:w-auto md:order-1`}
           id="navbar-sticky"
         >
-          <ul className="md:bg-transparent flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-            <li>
+          {theme && (
+            <ul className={theme ? theme?.burgerMenu?.class : "md:bg-transparent sm:bg-transparent  flex p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700 flex-col"}>
+
+              {theme.pages.map(p =>
+                <li key={p.id}>
+                  <Link
+                    href={p.id}
+                    className={theme?.burgerMenu?.link?.inactiveClass}
+                  >
+                    {p.title}
+                  </Link>
+                </li>)}
+              <li>
+                <Link
+                  href="/blog"
+                  className={theme?.burgerMenu?.link?.inactiveClass}
+                >
+                  Blog
+                </Link>
+              </li>
               <Link
-                href="/"
-                className=" text-xl block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-red-700 md:p-0 md:dark:text-red-500"
-                aria-current="page"
+                type="button"
+                href="/login"
+                className="md:hidden block text-white bg-black hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg  text-xl px-4 py-2 text-center ml-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
               >
-                Home
+                Login
               </Link>
-            </li>
-            <li>
-              <Link
-                href="/about"
-                className=" text-xl block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-red-700 md:p-0 md:dark:hover:text-red-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-              >
-                About
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/cause"
-                className=" text-xl block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-red-700 md:p-0 md:dark:hover:text-red-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-              >
-                Our Cause
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="#"
-                className=" text-xl block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-red-700 md:p-0 md:dark:hover:text-red-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-              >
-                Contact
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/blog"
-                className=" text-xl block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-red-700 md:p-0 md:dark:hover:text-red-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-              >
-                Blog
-              </Link>
-            </li>
-            <Link
-            type="button"
-            href="/login"
-            className="md:hidden block text-white bg-black hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg  text-xl px-4 py-2 text-center ml-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-          >
-           Login
-          </Link>
-          </ul>
+            </ul>
+          )}
         </div>
       </div>
     </nav>
   );
 };
 
-export default Navigation;
+const mapStateToProps = (state) => {
+  return {
+    theme: state.theme,
+  };
+};
+
+export default connect(mapStateToProps)(Navigation);

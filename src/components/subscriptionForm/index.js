@@ -138,30 +138,30 @@ const SubscriptionForm = () => {
             className="rounded border p-2 w-full"
             onChange={handleInputChange}
           >
-            <option value="Nourisher">Nourisher Level (R50/month)</option>
-            <option value="CaringPartner">
+            <option key="Nourisher" value="Nourisher">Nourisher Level (R50/month)</option>
+            <option key="CaringPartner" value="CaringPartner">
               Caring Partner Level (R100/month)
             </option>
-            <option value="HarmonyAdvocate">
+            <option key="HarmonyAdvocate" value="HarmonyAdvocate">
               Harmony Advocate Level (R200/month)
             </option>
-            <option value="UnitySupporter">
+            <option  key="UnitySupporter" value="UnitySupporter">
               Unity Supporter Level (R300/month)
             </option>
-            <option value="HopeBuilder">Hope Builder Level (R500/month)</option>
-            <option value="CompassionAmbassador">
+            <option key="HopeBuilder "value="HopeBuilder " >Hope Builder Level (R500/month)</option>
+            <option key="CompassionAmbassador" value="CompassionAmbassador">
               Compassion Ambassador Level (R1000/month)
             </option>
-            <option value="LifelineCreator">
+            <option key="LifelineCreator" value="LifelineCreator">
               Lifeline Creator Level (R2000/month)
             </option>
-            <option value="EmpowermentLeader">
+            <option key="EmpowermentLeader" value="EmpowermentLeader">
               Empowerment Leader Level (R3000/month)
             </option>
-            <option value="SustainabilityChampion">
+            <option key="SustainabilityChampion" value="SustainabilityChampion">
               Sustainability Champion Level (R5000/month)
             </option>
-            <option value="GlobalImpactVisionary">
+            <option key="GlobalImpactVisionary" value="GlobalImpactVisionary">
               Global Impact Visionary Level (R10,000/month)
             </option>
           </select>

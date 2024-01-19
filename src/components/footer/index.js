@@ -1,13 +1,15 @@
 import Link from 'next/link'
-const Footer = () => {
+import { connect } from "react-redux";
+
+const Footer = ({theme}) => {
   return (
-    <footer class="bg-red-800 text-white dark:bg-red-900 py-8">
+    <footer class={`${theme?.footer?.bg} ${theme?.footer?.fg} dark:bg-red-900 py-8`}>
       <div class="mx-auto w-full max-w-screen-xl px-4 py-12 lg:py-8">
         <div class="md:flex md:justify-between">
           <div class="mb-6 md:mb-0">
             <Link href="/" class="flex items-center">
               <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
-                Help'em
+               {theme?.partnerName}
               </span>
             </Link>
           </div>
@@ -19,7 +21,7 @@ const Footer = () => {
               <ul class="text-white-500 dark:text-white-400 font-medium">
                 <li class="mb-4">
                   <Link href="https://flowbite.com/" class="hover:underline">
-                    Helpem
+                  {theme?.partnerName}
                   </Link>
                 </li>
                 <li>
@@ -181,4 +183,10 @@ const Footer = () => {
 };
 
 
-export default Footer;
+const mapStateToProps = (state) => {
+  return {
+    theme: state.theme,
+  };
+};
+
+export default connect(mapStateToProps)(Footer);

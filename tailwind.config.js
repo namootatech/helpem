@@ -1,9 +1,9 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/pages/**/*.js',
+    './src/components/**/*.js',
+    './src/app/**/*.js',
   ],
   theme: {
     extend: {
@@ -15,4 +15,19 @@ module.exports = {
     },
   },
   plugins: [],
+  safelist: [
+    'bg-orange-700',
+    'bg-orange-800',
+    "py-3",
+    "mt-2",
+    "md:text-orange-700",
+    "md:text-red-700",
+    "bg-red-700",
+    "bg-[url('/images/helpem/home-page-header.jpg')]",
+    "bg-[url('/images/helpem/mission.jpg')]",
+    "bg-[url('/images/helpem/getinvolved.jpg')]",
+    "bg-[url('/images/fot/home-page-header.jpg')]",
+    "bg-[url('/images/fot/mission.jpg')]",
+    "bg-[url('/images/fot/getinvolved.jpg')]"
+  ]
 }
