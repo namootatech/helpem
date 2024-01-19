@@ -60,7 +60,7 @@ const spaBuilder = (spa) => {
                 {spa.elements.map(e => {
                     const Icon = icons[e.icon];
                     return (
-                        <div className="py-4 flex flex-col justify-center items-center text-center">
+                        <div key={e.title} className="py-4 flex flex-col justify-center items-center text-center">
                             <div className="flex flex-col justify-center items-center">
                                 <Icon size="5em" />
                                 <h2 className="text-4xl py-4 font-bold">{e.title}</h2>
