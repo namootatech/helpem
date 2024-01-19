@@ -12,8 +12,6 @@ export async function getStaticPaths() {
    const theme = await getThemeConfig();
    console.log("Theme", theme.themeName)
    let paths = theme?.pages?.map(p => ({params: {id :p.id}}))
-   console.log("Paths", paths)
- 
     return {
       paths,
       fallback: false,

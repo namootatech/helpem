@@ -13,7 +13,7 @@ const icons = {
     "book": BsBook,
     "user-group": HiUserGroup
 };
-const imageBlock = (config) => <div className={`bg-[url('/images/${theme?.themeName}/${config.image}')] bg-cover h-96 section-image`} />
+const imageBlock = (config) => <div className={`bg-[url('/images/${theme.themeName}/${config.image}')] bg-cover h-96 section-image`} />
 const multiTextBlock = (config) => (
     <div className="h-full px-8 py-8 text-center md:text-left">
         {config.content.map(item => (
@@ -26,13 +26,22 @@ const multiTextBlock = (config) => (
                 </p>
             </React.Fragment>
         ))}
+        {config.cta &&
+            <Link
+                type="button"
+                href={config.cta.link}
+                className={theme?.nav?.ctaClass}
+            >
+                {config.cta.title}
+            </Link>
+            }
     </div>
 )
 
 const articleElementBuilders = {
     "image-block": imageBlock,
     "multi-text-blocks": multiTextBlock,
-    
+
 }
 
 const articleBuilder = (article) => {
@@ -41,7 +50,6 @@ const articleBuilder = (article) => {
         <div className="container">
             <div className={`grid md:grid-cols-${elements.length} grid-cols-1`}>
                 {elements.map(e => {
-                    console.log(e, "element type", e.type)
                     return articleElementBuilders[e.type](e)
                 })}
             </div>
@@ -107,8 +115,8 @@ const heroBuilder = (config) => {
 
 const fullWidthTextBlock = (config) => (
     <div key={`section-${config.title}`}>
-            <h1 class="max-w-lg text-3xl font-semibold leading-normal text-gray-900 dark:text-white mb-2">{config?.title}</h1>
-            <div class="text-left text-2xl dark:text-gray-400 mt-2 mb-12" dangerouslySetInnerHTML={{ __html: nl2br(config?.text) }} />
+        <h1 class="max-w-lg text-3xl font-semibold leading-normal text-gray-900 dark:text-white mb-2">{config?.title}</h1>
+        <div class="text-left text-2xl dark:text-gray-400 mt-2 mb-12" dangerouslySetInnerHTML={{ __html: nl2br(config?.text) }} />
     </div>
 )
 
@@ -120,7 +128,10 @@ const builders = {
 }
 
 const buildArtifacts = (artifacts) => {
-    const built = artifacts.map(a => builders[a.type](a))
+    const built = artifacts.map(a => {
+
+        return builders[a.type](a)
+    })
     return built;
 }
 

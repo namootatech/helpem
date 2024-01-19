@@ -10,10 +10,12 @@ import buildArtifacts from '@/components/content/generator';
 
 function Home({theme}) {
   const page = theme?.pages?.find(page => page.id === "homepage");
-  console.log("page",page)
+  console.log("page", page)
+  console.log("theme", theme)
+  console.log(page ? buildArtifacts(page?.artifacts) : "")
   return (
     <Layout>
-      {page && buildArtifacts(page?.artifacts)}
+     {page &&   buildArtifacts(page?.artifacts)}
     </Layout>
   )
 }

@@ -16,6 +16,9 @@ module.exports = {
   },
   plugins: [],
   safelist: [
+    {pattern: /bg-./},
+    {pattern: /text-./},
+    {pattern: /border-./},
     'bg-orange-700',
     'bg-orange-800',
     "py-3",
@@ -28,6 +31,10 @@ module.exports = {
     "bg-[url('/images/helpem/getinvolved.jpg')]",
     "bg-[url('/images/fot/home-page-header.jpg')]",
     "bg-[url('/images/fot/mission.jpg')]",
-    "bg-[url('/images/fot/getinvolved.jpg')]"
+    "bg-[url('/images/fot/getinvolved.jpg')]",
+    "bg-[url('/images/go-bananas/home-page-header.jpg')]",
+    "bg-[url('/images/go-bananas/mission.jpg')]",
+    "bg-[url('/images/go-bananas/getinvolved.jpg')]",
+    "bg-[url('/images/go-bananas/banana-services.jpg')]",
   ]
 }

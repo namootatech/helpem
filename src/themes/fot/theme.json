@@ -1,6 +1,7 @@
 {
     "themeName": "fot",
     "partnerName": "Food on Every Table",
+    "progressColor":"#b91c1b",
     "heroHeader": "Transforming good intentions into tangible impacts.",
     "heroParagraph": "At Food on Every Table, we believe in the power of generosity and financial sustainability. Join us in building a community that empowers non-profit organizations to thrive while offering individuals the opportunity to earn while making a difference. Together, let's create a brighter future.",
     "heroButton": {
@@ -67,6 +68,10 @@
                         },
                         {
                             "type": "multi-text-blocks",
+                            "cta": {
+                                "title": "Subscribe",
+                                "link":"/subscribe"
+                            },
                             "content": [
                                 {
                                     "title": "Our Mission",
@@ -108,6 +113,10 @@
                     "elements": [
                         {
                             "type": "multi-text-blocks",
+                            "cta": {
+                                "title": "Subscribe",
+                                "link":"/subscribe"
+                            },
                             "content": [
                                 {
                                     "title": "Get Involved",
