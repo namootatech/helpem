@@ -13,7 +13,7 @@ const icons = {
     "book": BsBook,
     "user-group": HiUserGroup
 };
-const imageBlock = (config) => <div className={`bg-[url('/images/${theme.themeName}/${config.image}')] bg-cover h-96 section-image`} />
+const imageBlock = (config) => <div className={`bg-[url('/images/${theme.themeName}/${config.image}')] bg-cover h-full `} />
 const multiTextBlock = (config) => (
     <div className="h-full px-8 py-8 text-center md:text-left">
         {config.content.map(item => (
@@ -129,7 +129,6 @@ const builders = {
 
 const buildArtifacts = (artifacts) => {
     const built = artifacts.map(a => {
-
         return builders[a.type](a)
     })
     return built;
