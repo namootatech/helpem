@@ -2,7 +2,8 @@ import Layout from "@/components/layout";
 import { connect } from "react-redux";
 import buildArtifacts from '@/components/content/generator';
 
-export async function getServerSideProps(context) {
+export async function getStaticProps({ params }) {
+    const postData = getPostData(params.id);
     const { id } = context.query;
     return { props: { id } };
 }
