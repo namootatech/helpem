@@ -14,7 +14,7 @@ export default function Blog({ allPostsData }) {
   console.log(allPostsData);
   return (
     <Layout>
-      <div className="container mt-4 px-16 py-20 h-screen">
+      <div className="container md:mt-4 md:px-16 py-20 h-screen">
         <section>
           <ul className="grid grid-cols-4">
             {allPostsData.map(({ id, date, title, excerpt }) => (

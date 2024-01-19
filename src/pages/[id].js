@@ -26,7 +26,7 @@ function Page(props) {
     const page = props.theme?.pages?.find(page => page.id === pageId);
     return (
         <Layout>
-            <div className="container mt-4 px-16">
+            <div className="container md:mt-4 md:px-16 px-4">
                 {page && buildArtifacts(page?.artifacts)}
             </div>
         </Layout>
