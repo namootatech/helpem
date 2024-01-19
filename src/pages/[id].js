@@ -10,8 +10,9 @@ export async function getStaticProps({ params }) {
 
 export async function getStaticPaths() {
    const theme = await getThemeConfig();
+   console.log("Theme", theme.themeName)
    let paths = theme?.pages?.map(p => ({params: {id :p.id}}))
-   paths.push({params: {id:""}})
+   console.log("Paths", paths)
  
     return {
       paths,
