@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { connect } from "react-redux";
+import React from "react";
 
 const Navigation = ({ theme }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -65,7 +66,7 @@ const Navigation = ({ theme }) => {
             <ul className={theme ? theme?.burgerMenu?.class : "md:bg-transparent sm:bg-transparent  flex p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700 flex-col"}>
 
               {theme.pages.map(p =>
-                <li>
+                <li key={p.id}>
                   <Link
                     href={p.id}
                     className={theme?.burgerMenu?.link?.inactiveClass}

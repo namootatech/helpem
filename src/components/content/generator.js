@@ -2,6 +2,7 @@ import { getThemeConfig } from "@/themes";
 import { GiFoodTruck } from 'react-icons/gi';
 import { BsBook } from 'react-icons/bs';
 import { HiUserGroup } from 'react-icons/hi';
+import React from "react";
 import Link from "next/link";
 import nl2br from "nl2br";
 
@@ -16,14 +17,14 @@ const imageBlock = (config) => <div className={`bg-[url('/images/${theme?.themeN
 const multiTextBlock = (config) => (
     <div className="h-full px-8 py-8 text-center md:text-left">
         {config.content.map(item => (
-            <>
+            <React.Fragment key={item.title}>
                 <h2 className={theme?.section?.header?.class}>
                     {item.title}
                 </h2>
                 <p className=" text-base/loose text-2xl md:text-2xl lg:text-2xl dark:text-white mb-4">
                     {item.text}
                 </p>
-            </>
+            </React.Fragment>
         ))}
     </div>
 )
@@ -41,7 +42,7 @@ const articleBuilder = (article) => {
             <div className={`grid md:grid-cols-${elements.length} grid-cols-1`}>
                 {elements.map(e => {
                     console.log(e, "element type", e.type)
-                    return articleElementBuilders[e.type](e)
+                    return <React.Fragment key={e.type}>{articleElementBuilders[e.type](e)}</React.Fragment>
                 })}
             </div>
         </div>
@@ -119,7 +120,7 @@ const builders = {
 }
 
 const buildArtifacts = (artifacts) => {
-    const built = artifacts.map(a => builders[a.type](a))
+    const built = <React.Fragment></React.Fragment>
     return built;
 }
 
