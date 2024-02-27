@@ -33,6 +33,13 @@
     "remark-html": "^16.0.1",
     "tailwind-toastify": "^1.0.7",
     "tailwindcss": "3.3.3",
-    "uuid": "^9.0.1"
+    "uuid": "^9.0.1",
+    "apexcharts": "^3.45.2",
+    "flatpickr": "^4.6.13",
+    "jsvectormap": "^1.5.3",
+    "react-apexcharts": "^1.4.1"
+  },
+  "devDependencies": {
+    "@types/node": "20.11.20"
   }
 }

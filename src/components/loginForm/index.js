@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import Link from "next/link";
+import { connect } from "react-redux";
+import { useRouter } from 'next/navigation'
 
-const SubscriptionForm = () => {
+
+const SubscriptionForm = ({ login }) => {
+  const router = useRouter()
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -12,7 +16,6 @@ const SubscriptionForm = () => {
   });
 
   const [emailError, setEmailError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
 
   const handleInputChange = (e) => {
     setFormData({
@@ -32,21 +35,32 @@ const SubscriptionForm = () => {
       setEmailError("");
     }
 
-    // Check if the passwords match
-    if (formData.password !== formData.confirmPassword) {
-      setPasswordError("Passwords do not match.");
-      return;
-    } else {
-      setPasswordError("");
-    }
-
-    if (!formData.agreeToTerms) {
-      alert("Please agree to the Terms and Conditions.");
-      return;
-    }
-
-    // If all checks pass, you can submit the form
-    console.log("Form submitted:", formData);
+    const API_URL = process.env.NEXT_PUBLIC_API_URL+"/login";
+    console.log(API_URL);
+    fetch(API_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        console.log(response);
+       
+        if (response.error) {
+          setEmailError(response.message);
+        } else {
+          console.log("You have successfully loggedin.");
+          login(response.data);
+          
+ 
+          router.push('/app', { scroll: false })
+        }
+      })
+      .catch((error) => {
+        setEmailError("Error:", error);
+      });
   };
 
   return (
@@ -66,6 +80,7 @@ const SubscriptionForm = () => {
             type="email"
             name="email"
             id="email"
+            onChange={handleInputChange}
             class="bg-gray-50 border border-gray-300 text-gray-900 md:text-xl text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
             placeholder="name@company.com"
             required
@@ -83,6 +98,7 @@ const SubscriptionForm = () => {
             name="password"
             id="password"
             placeholder="•••••••"
+            onChange={handleInputChange}
             class="bg-gray-50 border border-gray-300 text-gray-900 md:text-xl text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
             required
           />
@@ -114,6 +130,7 @@ const SubscriptionForm = () => {
         </div>
         <button
           type="submit"
+          onClick={handleSubmit}
           class="w-full text-white bg-black hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg md:text-xl text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
         >
           Login to your account
@@ -124,9 +141,15 @@ const SubscriptionForm = () => {
             Create account
           </Link>
         </div>
+        <div className="text-red-500">{emailError}</div>
       </form>
     </div>
   );
 };
+const mapDispatchToProps = (dispatch) => {
+  return {
+    login: (data) => dispatch({ type: "LOGIN", payload: data }),
+  };
+};
 
-export default SubscriptionForm;
+export default connect(null, mapDispatchToProps)(SubscriptionForm);

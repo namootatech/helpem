@@ -84,6 +84,7 @@ var createElement = (function () {
 })();
 
 export function postToURL(url, values) {
+  console.log(values)
   values = values || {};
 
   var form = createElement("form", {

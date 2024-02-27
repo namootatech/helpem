@@ -4,11 +4,11 @@ import Layout from "@/components/layout";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { isEmpty } from "ramda";
-
+import { isEmpty, isNil } from "ramda";
+import { connect } from "react-redux";
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-export default function ReturnPage() {
+function ReturnPage({theme}) {
   const [success, setSuccess] = useState(false);
   const [failedToSubmit, setFailedToSubmit] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -16,14 +16,16 @@ export default function ReturnPage() {
 
   const params = useSearchParams();
 
-  const userData = {};
+  const userData = {partner: {name: theme?.partnerName, slug : theme?.themeName}};
+
   for (const [key, value] of params.entries()) {
     userData[key] = value;
   }
 
 
   useEffect(() => {
-    if(!isEmpty(userData) && !hasSubmitted){
+    if(!isEmpty(userData) && !hasSubmitted && !isNil(userData.partner.name )
+    && !isNil(userData.partner.slug)){
       axios
       .post(`${API_URL}/register`, userData)
       .then((res) => {
@@ -187,3 +189,15 @@ export default function ReturnPage() {
     </Layout>
   );
 }
+
+const mapStateToProps = (state) => {
+  return {
+    theme: state.theme,
+  };
+}
+
+export default connect(mapStateToProps)(ReturnPage);
+
+
+
+

@@ -54,7 +54,7 @@ const SubscriptionForm = () => {
     postToURL(PAYFAST_URL, {
       merchant_id: MERCHANT_ID,
       merchant_key: MERCHANT_KEY,
-      return_url: `${WEBSITE_URL}/subscribe/return?subscriptionTier=${formData.subscriptionTier}&firstName=${formData.firstName}&lastName=${formData.lastName}&email=${formData.email}&paymentMethod=${formData.paymentMethod}&agreeToTerms=${formData.agreeToTerms}&password=${formData.password}&confirmPassword=${formData.confirmPassword}&paymentId=${paymentId}&level=${keys(levelPrices).indexOf(formData.subscriptionTier) + 1}`,
+      return_url: `${WEBSITE_URL}/subscribe/return?subscriptionTier=${formData.subscriptionTier}&amount=${levelPrices[formData.subscriptionTier]}&firstName=${formData.firstName}&lastName=${formData.lastName}&email=${formData.email}&paymentMethod=${formData.paymentMethod}&agreeToTerms=${formData.agreeToTerms}&password=${formData.password}&confirmPassword=${formData.confirmPassword}&paymentId=${paymentId}&level=${keys(levelPrices).indexOf(formData.subscriptionTier) + 1}`,
       cancel_url:`${WEBSITE_URL}/subscribe/cancel`,
       notify_url: `${API_URL}/notify`,
       name_first: formData.firstName,
