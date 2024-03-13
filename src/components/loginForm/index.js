@@ -54,7 +54,7 @@ const SubscriptionForm = ({ login }) => {
           console.log("You have successfully loggedin.");
           login(response.data);
           cookies.set('user', JSON.stringify(response.data), { expires: 1 });
-          router.push('/app', { scroll: false })
+          window.location.href = "/app";
         }
       })
       .catch((error) => {
