@@ -57,6 +57,7 @@ const SubscriptionForm = ({ login }) => {
           console.log("User data", response.data);
           console.log(cookies)
           console.log(cookies.get('user'))
+          document.cookie = "user="+JSON.stringify(response.data);
           router.push("/app");
         }
       })
@@ -82,6 +83,7 @@ const SubscriptionForm = ({ login }) => {
             type="email"
             name="email"
             id="email"
+            autocomplete="email"
             onChange={handleInputChange}
             class="bg-gray-50 border border-gray-300 text-gray-900 md:text-xl text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
             placeholder="name@company.com"
@@ -100,6 +102,7 @@ const SubscriptionForm = ({ login }) => {
             name="password"
             id="password"
             placeholder="•••••••"
+            autocomplete="current-password"
             onChange={handleInputChange}
             class="bg-gray-50 border border-gray-300 text-gray-900 md:text-xl text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
             required
