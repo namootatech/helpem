@@ -26,8 +26,6 @@ const levelPrices = {
 };
 
 const SubscriptionForm = ({user}) => {
-  const [searchParams] = useSearchParams();
-  const parent = searchParams.get('parent');
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
