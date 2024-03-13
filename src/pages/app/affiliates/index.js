@@ -43,6 +43,7 @@ const AffiliatesPage = ({user}) => {
         <TableOne />
         <div className="rounded-sm border border-stroke bg-white px-5 pb-2.5 pt-6 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
           <h1>Your affiliate link</h1>
+          
           <p className="text-base my-2"> 
             <a href={userLink}>{`${userLink}`}</a>
           </p>
