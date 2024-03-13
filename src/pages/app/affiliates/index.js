@@ -64,7 +64,7 @@ const AffiliatesPage = ({user}) => {
             </thead>
             <tbody>
               {affiliates.map((affiliate) => (
-                <tr >
+                <tr key={affiliate._id}>
                   <td className="py-2 px-2 border border-gray-200">{capitalize(affiliate.firstName)}{" "}{capitalize(affiliate.lastName)}</td>
                   <td className="py-2 px-2 border border-gray-200">{affiliate.email}</td>
                   <td className="py-2 px-2 border border-gray-200">
