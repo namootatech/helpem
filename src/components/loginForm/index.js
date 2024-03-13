@@ -53,8 +53,11 @@ const SubscriptionForm = ({ login }) => {
         } else {
           console.log("You have successfully loggedin.");
           login(response.data);
-          cookies.set('user', JSON.stringify(response.data), { expires: 1 });
-          window.location.href = "/app";
+          cookies.set('user', JSON.stringify(response.data));
+          console.log("User data", response.data);
+          console.log(cookies)
+          console.log(cookies.get('user'))
+          router.push("/app");
         }
       })
       .catch((error) => {
