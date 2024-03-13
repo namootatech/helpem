@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { connect } from "react-redux";
 import { useRouter } from 'next/navigation'
-
+import cookies from 'js-cookie'
 
 const SubscriptionForm = ({ login }) => {
   const router = useRouter()
@@ -53,8 +53,7 @@ const SubscriptionForm = ({ login }) => {
         } else {
           console.log("You have successfully loggedin.");
           login(response.data);
-          
- 
+          cookies.set('user', JSON.stringify(response.data), { expires: 1 });
           router.push('/app', { scroll: false })
         }
       })

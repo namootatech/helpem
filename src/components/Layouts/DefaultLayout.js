@@ -1,11 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Sidebar from "@/components/SideBar";
 import Header from "@/components/Header/dashboard";
+import Cookies from "js-cookie";
+import { useRouter } from "next/router";
+import { connect } from "react-redux";
 
-export default function DefaultLayout({
+function DefaultLayout({
   children,
+  login,
 }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const router = useRouter();
+
+
+  useEffect(()=> {
+    if (typeof window !== "undefined") {
+      const user = Cookies.get("user");
+      if (!user) {
+        router.push("/login");
+      }
+      else if (user){
+        const userObj = JSON.parse(user);
+        login(userObj);
+      }
+    }
+  }, [])
+
   return (
     <>
       <div className="flex h-screen overflow-hidden">
@@ -22,3 +42,12 @@ export default function DefaultLayout({
     </>
   );
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    login: (user) => dispatch({ type: "LOGIN", payload: user }),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(DefaultLayout);
+

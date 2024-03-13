@@ -19,7 +19,7 @@ const Settings = () => {
           <div className="col-span-5 xl:col-span-3">
             <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
               <div className="border-b border-stroke px-7 py-4 dark:border-strokedark">
-                <h3 className="font-medium text-black dark:text-white">
+                <h3 className="font-medium text-black dark:text-gray-900">
                   Personal Information
                 </h3>
               </div>
@@ -28,7 +28,7 @@ const Settings = () => {
                   <div className="mb-5.5 flex flex-col gap-5.5 sm:flex-row">
                     <div className="w-full sm:w-1/2">
                       <label
-                        className="mb-3 block text-sm font-medium text-black dark:text-white"
+                        className="mb-3 block text-sm font-medium text-black dark:text-gray-900"
                         htmlFor="fullName"
                       >
                         Full Name
@@ -60,7 +60,7 @@ const Settings = () => {
                           </svg>
                         </span>
                         <input
-                          className="w-full rounded border border-stroke bg-gray py-3 pl-11.5 pr-4.5 text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
+                          className="w-full rounded border border-stroke bg-gray py-3 pl-11.5 pr-4.5 text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-gray-900 dark:focus:border-primary"
                           type="text"
                           name="fullName"
                           id="fullName"
@@ -72,13 +72,13 @@ const Settings = () => {
 
                     <div className="w-full sm:w-1/2">
                       <label
-                        className="mb-3 block text-sm font-medium text-black dark:text-white"
+                        className="mb-3 block text-sm font-medium text-black dark:text-gray-900"
                         htmlFor="phoneNumber"
                       >
                         Phone Number
                       </label>
                       <input
-                        className="w-full rounded border border-stroke bg-gray px-4.5 py-3 text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
+                        className="w-full rounded border border-stroke bg-gray px-4.5 py-3 text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-gray-900 dark:focus:border-primary"
                         type="text"
                         name="phoneNumber"
                         id="phoneNumber"
@@ -90,7 +90,7 @@ const Settings = () => {
 
                   <div className="mb-5.5">
                     <label
-                      className="mb-3 block text-sm font-medium text-black dark:text-white"
+                      className="mb-3 block text-sm font-medium text-black dark:text-gray-900"
                       htmlFor="emailAddress"
                     >
                       Email Address
@@ -122,7 +122,7 @@ const Settings = () => {
                         </svg>
                       </span>
                       <input
-                        className="w-full rounded border border-stroke bg-gray py-3 pl-11.5 pr-4.5 text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
+                        className="w-full rounded border border-stroke bg-gray py-3 pl-11.5 pr-4.5 text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-gray-900 dark:focus:border-primary"
                         type="email"
                         name="emailAddress"
                         id="emailAddress"
@@ -134,13 +134,13 @@ const Settings = () => {
 
                   <div className="mb-5.5">
                     <label
-                      className="mb-3 block text-sm font-medium text-black dark:text-white"
+                      className="mb-3 block text-sm font-medium text-black dark:text-gray-900"
                       htmlFor="Username"
                     >
                       Username
                     </label>
                     <input
-                      className="w-full rounded border border-stroke bg-gray px-4.5 py-3 text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
+                      className="w-full rounded border border-stroke bg-gray px-4.5 py-3 text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-gray-900 dark:focus:border-primary"
                       type="text"
                       name="Username"
                       id="Username"
@@ -151,7 +151,7 @@ const Settings = () => {
 
                   <div className="mb-5.5">
                     <label
-                      className="mb-3 block text-sm font-medium text-black dark:text-white"
+                      className="mb-3 block text-sm font-medium text-black dark:text-gray-900"
                       htmlFor="Username"
                     >
                       BIO
@@ -189,7 +189,7 @@ const Settings = () => {
                       </span>
 
                       <textarea
-                        className="w-full rounded border border-stroke bg-gray py-3 pl-11.5 pr-4.5 text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
+                        className="w-full rounded border border-stroke bg-gray py-3 pl-11.5 pr-4.5 text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-gray-900 dark:focus:border-primary"
                         name="bio"
                         id="bio"
                         rows={6}
@@ -201,7 +201,7 @@ const Settings = () => {
 
                   <div className="flex justify-end gap-4.5">
                     <button
-                      className="flex justify-center rounded border border-stroke px-6 py-2 font-medium text-black hover:shadow-1 dark:border-strokedark dark:text-white"
+                      className="flex justify-center rounded border border-stroke px-6 py-2 font-medium text-black hover:shadow-1 dark:border-strokedark dark:text-gray-900"
                       type="submit"
                     >
                       Cancel
@@ -220,7 +220,7 @@ const Settings = () => {
           <div className="col-span-5 xl:col-span-2">
             <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
               <div className="border-b border-stroke px-7 py-4 dark:border-strokedark">
-                <h3 className="font-medium text-black dark:text-white">
+                <h3 className="font-medium text-black dark:text-gray-900">
                   Your Photo
                 </h3>
               </div>
@@ -236,7 +236,7 @@ const Settings = () => {
                       />
                     </div>
                     <div>
-                      <span className="mb-1.5 text-black dark:text-white">
+                      <span className="mb-1.5 text-black dark:text-gray-900">
                         Edit your photo
                       </span>
                       <span className="flex gap-2.5">
@@ -299,7 +299,7 @@ const Settings = () => {
 
                   <div className="flex justify-end gap-4.5">
                     <button
-                      className="flex justify-center rounded border border-stroke px-6 py-2 font-medium text-black hover:shadow-1 dark:border-strokedark dark:text-white"
+                      className="flex justify-center rounded border border-stroke px-6 py-2 font-medium text-black hover:shadow-1 dark:border-strokedark dark:text-gray-900"
                       type="submit"
                     >
                       Cancel

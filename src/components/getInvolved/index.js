@@ -10,13 +10,13 @@ const GetInvolved = ({theme}) => {
           <h2 className={theme?.section?.header?.class}>
            {theme?.section3?.article1?.title}
           </h2>
-          <p className=" text-base/loose text-2xl md:text-2xl lg:text-2xl dark:text-white mb-4">
+          <p className=" text-base/loose text-2xl md:text-2xl lg:text-2xl dark:text-gray-900 mb-4">
             {theme?.section3?.article1?.text}
           </p>
           <h2 className={theme?.section?.header?.class}>
            {theme?.section3?.article2?.title}
           </h2>
-          <p className="text-base/loose text-2xl md:text-2xl lg:text-2xl dark:text-white mb-4">
+          <p className="text-base/loose text-2xl md:text-2xl lg:text-2xl dark:text-gray-900 mb-4">
            {theme?.section3?.article2?.text}
           </p>
           <Link

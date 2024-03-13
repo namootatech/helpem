@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 const TableTwo = ({transactions}) => {
   return (
     <div className="rounded-sm border border-stroke bg-white px-5 pb-2.5 pt-6 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
-      <h4 className="mb-6 text-xl font-semibold text-black dark:text-white">
+      <h4 className="mb-6 text-xl font-semibold text-black dark:text-gray-900">
         Your recent transactions
       </h4>
 
@@ -35,7 +35,7 @@ const TableTwo = ({transactions}) => {
           </div>
         </div>
 
-        {transactions.map((transaction, key) => (
+        {transactions?.map((transaction, key) => (
           <div
             className={`grid grid-cols-3 sm:grid-cols-5 ${
               key === transactions.length - 1
@@ -48,13 +48,13 @@ const TableTwo = ({transactions}) => {
               <div className="flex-shrink-0">
                 {/* data here */}
               </div>
-              <p className="hidden text-black dark:text-white sm:block">
+              <p className="hidden text-black dark:text-gray-900 sm:block">
                 {moment(transaction.billing_date, "YYYY-MM-DD").format("DD MMM YYYY")}
               </p>
             </div>
 
             <div className="flex items-center justify-center p-2.5 xl:p-5">
-              <p className="text-black dark:text-white">R{transaction.amount_gross}</p>
+              <p className="text-black dark:text-gray-900">R{transaction.amount_gross}</p>
             </div>
 
             <div className="flex items-center justify-center p-2.5 xl:p-5">
@@ -62,7 +62,7 @@ const TableTwo = ({transactions}) => {
             </div>
 
             <div className="hidden items-center justify-center p-2.5 sm:flex xl:p-5">
-              <p className="text-black dark:text-white">{transaction.pf_payment_id}</p>
+              <p className="text-black dark:text-gray-900">{transaction.pf_payment_id}</p>
             </div>
           </div>
         ))}

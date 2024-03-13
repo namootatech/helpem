@@ -4,6 +4,7 @@ import { postToURL } from "../payfast/payfast";
 import { v4 as uuidv4 } from 'uuid';
 import { keys } from "ramda";
 import moment from "moment";
+import { useSearchParams } from "next/navigation";
 
 const PAYFAST_URL = process.env.NEXT_PUBLIC_PAYFAST_URL;
 const WEBSITE_URL = process.env.NEXT_PUBLIC_WEBSITE_URL;
@@ -24,7 +25,9 @@ const levelPrices = {
   GlobalImpactVisionary: 10000,
 };
 
-const SubscriptionForm = () => {
+const SubscriptionForm = ({user}) => {
+  const [searchParams] = useSearchParams();
+  const parent = searchParams.get('parent');
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -47,14 +50,14 @@ const SubscriptionForm = () => {
       [e.target.name]: e.target.value,
     });
   };
-
+  console.log(user)
   const handleSubmit = (e) => {
     e.preventDefault();
     const paymentId = uuidv4();
-    postToURL(PAYFAST_URL, {
+    let data = {
       merchant_id: MERCHANT_ID,
       merchant_key: MERCHANT_KEY,
-      return_url: `${WEBSITE_URL}/subscribe/return?subscriptionTier=${formData.subscriptionTier}&amount=${levelPrices[formData.subscriptionTier]}&firstName=${formData.firstName}&lastName=${formData.lastName}&email=${formData.email}&paymentMethod=${formData.paymentMethod}&agreeToTerms=${formData.agreeToTerms}&password=${formData.password}&confirmPassword=${formData.confirmPassword}&paymentId=${paymentId}&level=${keys(levelPrices).indexOf(formData.subscriptionTier) + 1}`,
+      return_url: `${WEBSITE_URL}/subscribe/return?subscriptionTier=${formData.subscriptionTier}&amount=${levelPrices[formData.subscriptionTier]}&firstName=${formData.firstName}&lastName=${formData.lastName}&email=${formData.email}&paymentMethod=${formData.paymentMethod}&agreeToTerms=${formData.agreeToTerms}&password=${formData.password}&confirmPassword=${formData.confirmPassword}&paymentId=${paymentId}&level=${keys(levelPrices).indexOf(formData.subscriptionTier) + 1}${user?.parent ? `&parent=${user?.parent}&` :''}`,
       cancel_url:`${WEBSITE_URL}/subscribe/cancel`,
       notify_url: `${API_URL}/notify`,
       name_first: formData.firstName,
@@ -72,8 +75,19 @@ const SubscriptionForm = () => {
       subscription_notify_email: true,
       subscription_notify_webhook: true,
       subscription_notify_buyer: true,
-    });
+    }
+
+    if(user?.parent){
+      data = {
+        ...data,
+        custom_str1: user?.parent ? user?.parent : '',
+      }
+    }
+
+    postToURL(PAYFAST_URL, data);
   };
+
+  
 
   const toggleTerms = () => {
     setFormData({

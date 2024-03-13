@@ -17,7 +17,7 @@ const Buttons = () => {
       {/* <!-- Normal Button Items --> */}
       <div className="mb-10 rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
         <div className="border-b border-stroke px-7 py-4 dark:border-strokedark">
-          <h3 className="font-medium text-black dark:text-white">
+          <h3 className="font-medium text-black dark:text-gray-900">
             Normal Button
           </h3>
         </div>
@@ -26,21 +26,21 @@ const Buttons = () => {
           <div className="mb-7.5 flex flex-wrap gap-5 xl:gap-20">
             <Link
               href="#"
-              className="inline-flex items-center justify-center bg-primary px-10 py-4 text-center font-medium text-white hover:bg-opacity-90 lg:px-8 xl:px-10"
+              className="inline-flex items-center justify-center bg-primary px-10 py-4 text-center font-medium text-gray-900 hover:bg-opacity-90 lg:px-8 xl:px-10"
             >
               Button
             </Link>
 
             <Link
               href="#"
-              className="inline-flex items-center justify-center rounded-md bg-primary px-10 py-4 text-center font-medium text-white hover:bg-opacity-90 lg:px-8 xl:px-10"
+              className="inline-flex items-center justify-center rounded-md bg-primary px-10 py-4 text-center font-medium text-gray-900 hover:bg-opacity-90 lg:px-8 xl:px-10"
             >
               Button
             </Link>
 
             <Link
               href="#"
-              className="inline-flex items-center justify-center rounded-full bg-primary px-10 py-4 text-center font-medium text-white hover:bg-opacity-90 lg:px-8 xl:px-10"
+              className="inline-flex items-center justify-center rounded-full bg-primary px-10 py-4 text-center font-medium text-gray-900 hover:bg-opacity-90 lg:px-8 xl:px-10"
             >
               Button
             </Link>
@@ -56,21 +56,21 @@ const Buttons = () => {
           <div className="mb-7.5 flex flex-wrap gap-5 xl:gap-20">
             <Link
               href="#"
-              className="inline-flex items-center justify-center bg-meta-3 px-10 py-4 text-center font-medium text-white hover:bg-opacity-90 lg:px-8 xl:px-10"
+              className="inline-flex items-center justify-center bg-meta-3 px-10 py-4 text-center font-medium text-gray-900 hover:bg-opacity-90 lg:px-8 xl:px-10"
             >
               Button
             </Link>
 
             <Link
               href="#"
-              className="inline-flex items-center justify-center rounded-md bg-meta-3 px-10 py-4 text-center font-medium text-white hover:bg-opacity-90 lg:px-8 xl:px-10"
+              className="inline-flex items-center justify-center rounded-md bg-meta-3 px-10 py-4 text-center font-medium text-gray-900 hover:bg-opacity-90 lg:px-8 xl:px-10"
             >
               Button
             </Link>
 
             <Link
               href="#"
-              className="inline-flex items-center justify-center rounded-full bg-meta-3 px-10 py-4 text-center font-medium text-white hover:bg-opacity-90 lg:px-8 xl:px-10"
+              className="inline-flex items-center justify-center rounded-full bg-meta-3 px-10 py-4 text-center font-medium text-gray-900 hover:bg-opacity-90 lg:px-8 xl:px-10"
             >
               Button
             </Link>
@@ -86,21 +86,21 @@ const Buttons = () => {
           <div className="flex flex-wrap gap-5 xl:gap-20">
             <Link
               href="#"
-              className="inline-flex items-center justify-center bg-black px-10 py-4 text-center font-medium text-white hover:bg-opacity-90 lg:px-8 xl:px-10"
+              className="inline-flex items-center justify-center bg-gray-900px-10 py-4 text-center font-medium text-gray-900 hover:bg-opacity-90 lg:px-8 xl:px-10"
             >
               Button
             </Link>
 
             <Link
               href="#"
-              className="inline-flex items-center justify-center rounded-md bg-black px-10 py-4 text-center font-medium text-white hover:bg-opacity-90 lg:px-8 xl:px-10"
+              className="inline-flex items-center justify-center rounded-md bg-gray-900px-10 py-4 text-center font-medium text-gray-900 hover:bg-opacity-90 lg:px-8 xl:px-10"
             >
               Button
             </Link>
 
             <Link
               href="#"
-              className="inline-flex items-center justify-center rounded-full bg-black px-10 py-4 text-center font-medium text-white hover:bg-opacity-90 lg:px-8 xl:px-10"
+              className="inline-flex items-center justify-center rounded-full bg-gray-900px-10 py-4 text-center font-medium text-gray-900 hover:bg-opacity-90 lg:px-8 xl:px-10"
             >
               Button
             </Link>
@@ -118,7 +118,7 @@ const Buttons = () => {
       {/* <!-- Button With Icon Items --> */}
       <div className="mb-10 rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
         <div className="border-b border-stroke px-7 py-4 dark:border-strokedark">
-          <h3 className="font-medium text-black dark:text-white">
+          <h3 className="font-medium text-black dark:text-gray-900">
             Button With Icon
           </h3>
         </div>
@@ -127,7 +127,7 @@ const Buttons = () => {
           <div className="mb-7.5 flex flex-wrap gap-5 xl:gap-7.5">
             <Link
               href="#"
-              className="inline-flex items-center justify-center gap-2.5 bg-primary px-10 py-4 text-center font-medium text-white hover:bg-opacity-90 lg:px-8 xl:px-10"
+              className="inline-flex items-center justify-center gap-2.5 bg-primary px-10 py-4 text-center font-medium text-gray-900 hover:bg-opacity-90 lg:px-8 xl:px-10"
             >
               <span>
                 <svg
@@ -153,7 +153,7 @@ const Buttons = () => {
 
             <Link
               href="#"
-              className="inline-flex items-center justify-center gap-2.5 bg-meta-3 px-10 py-4 text-center font-medium text-white hover:bg-opacity-90 lg:px-8 xl:px-10"
+              className="inline-flex items-center justify-center gap-2.5 bg-meta-3 px-10 py-4 text-center font-medium text-gray-900 hover:bg-opacity-90 lg:px-8 xl:px-10"
             >
               <span>
                 <svg
@@ -179,7 +179,7 @@ const Buttons = () => {
 
             <Link
               href="#"
-              className="inline-flex items-center justify-center gap-2.5 bg-black px-10 py-4 text-center font-medium text-white hover:bg-opacity-90 lg:px-8 xl:px-10"
+              className="inline-flex items-center justify-center gap-2.5 bg-gray-900px-10 py-4 text-center font-medium text-gray-900 hover:bg-opacity-90 lg:px-8 xl:px-10"
             >
               <span>
                 <svg
@@ -233,7 +233,7 @@ const Buttons = () => {
           <div className="mb-7.5 flex flex-wrap gap-5 xl:gap-7.5">
             <Link
               href="#"
-              className="inline-flex items-center justify-center gap-2.5 rounded-md bg-primary px-10 py-4 text-center font-medium text-white hover:bg-opacity-90 lg:px-8 xl:px-10"
+              className="inline-flex items-center justify-center gap-2.5 rounded-md bg-primary px-10 py-4 text-center font-medium text-gray-900 hover:bg-opacity-90 lg:px-8 xl:px-10"
             >
               <span>
                 <svg
@@ -263,7 +263,7 @@ const Buttons = () => {
 
             <Link
               href="#"
-              className="inline-flex items-center justify-center gap-2.5 rounded-md bg-meta-3 px-10 py-4 text-center font-medium text-white hover:bg-opacity-90 lg:px-8 xl:px-10"
+              className="inline-flex items-center justify-center gap-2.5 rounded-md bg-meta-3 px-10 py-4 text-center font-medium text-gray-900 hover:bg-opacity-90 lg:px-8 xl:px-10"
             >
               <span>
                 <svg
@@ -293,7 +293,7 @@ const Buttons = () => {
 
             <Link
               href="#"
-              className="inline-flex items-center justify-center gap-2.5 rounded-md bg-black px-10 py-4 text-center font-medium text-white hover:bg-opacity-90 lg:px-8 xl:px-10"
+              className="inline-flex items-center justify-center gap-2.5 rounded-md bg-gray-900px-10 py-4 text-center font-medium text-gray-900 hover:bg-opacity-90 lg:px-8 xl:px-10"
             >
               <span>
                 <svg
@@ -355,7 +355,7 @@ const Buttons = () => {
           <div className="flex flex-wrap gap-5 xl:gap-7.5">
             <Link
               href="#"
-              className="inline-flex items-center justify-center gap-2.5 rounded-full bg-primary px-10 py-4 text-center font-medium text-white hover:bg-opacity-90 lg:px-8 xl:px-10"
+              className="inline-flex items-center justify-center gap-2.5 rounded-full bg-primary px-10 py-4 text-center font-medium text-gray-900 hover:bg-opacity-90 lg:px-8 xl:px-10"
             >
               <span>
                 <svg
@@ -384,7 +384,7 @@ const Buttons = () => {
 
             <Link
               href="#"
-              className="inline-flex items-center justify-center gap-2.5 rounded-full bg-meta-3 px-10 py-4 text-center font-medium text-white hover:bg-opacity-90 lg:px-8 xl:px-10"
+              className="inline-flex items-center justify-center gap-2.5 rounded-full bg-meta-3 px-10 py-4 text-center font-medium text-gray-900 hover:bg-opacity-90 lg:px-8 xl:px-10"
             >
               <span>
                 <svg
@@ -413,7 +413,7 @@ const Buttons = () => {
 
             <Link
               href="#"
-              className="inline-flex items-center justify-center gap-2.5 rounded-full bg-black px-10 py-4 text-center font-medium text-white hover:bg-opacity-90 lg:px-8 xl:px-10"
+              className="inline-flex items-center justify-center gap-2.5 rounded-full bg-gray-900px-10 py-4 text-center font-medium text-gray-900 hover:bg-opacity-90 lg:px-8 xl:px-10"
             >
               <span>
                 <svg

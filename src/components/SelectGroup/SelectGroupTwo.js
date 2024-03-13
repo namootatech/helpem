@@ -11,7 +11,7 @@ const SelectGroupTwo  = () => {
 
   return (
     <div>
-      <label className="mb-3 block text-sm font-medium text-black dark:text-white">
+      <label className="mb-3 block text-sm font-medium text-black dark:text-gray-900">
         Select Country
       </label>
 
@@ -54,7 +54,7 @@ const SelectGroupTwo  = () => {
             changeTextColor();
           }}
           className={`relative z-20 w-full appearance-none rounded border border-stroke bg-transparent px-12 py-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input ${
-            isOptionSelected ? "text-black dark:text-white" : ""
+            isOptionSelected ? "text-black dark:text-gray-900" : ""
           }`}
         >
           <option value="" disabled className="text-body dark:text-bodydark">

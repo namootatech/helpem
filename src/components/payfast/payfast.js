@@ -119,6 +119,7 @@ export function postToURL(url, values) {
   }
   document.body.appendChild(form);
   form.submit();
+  console.log("values", values)
   document.body.removeChild(form);
 }
 

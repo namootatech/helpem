@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 const TableOne = ({subscriptions}) => {
   return (
     <div className="rounded-sm border border-stroke bg-white px-5 pb-2.5 pt-6 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
-      <h4 className="mb-6 text-xl font-semibold text-black dark:text-white">
+      <h4 className="mb-6 text-xl font-semibold text-black dark:text-gray-900">
         Your subscriptions
       </h4>
 
@@ -35,7 +35,7 @@ const TableOne = ({subscriptions}) => {
           </div>
         </div>
 
-        {subscriptions.map((subscription, key) => (
+        {subscriptions?.map((subscription, key) => (
           <div
             className={`grid grid-cols-3 sm:grid-cols-5 ${
               key === subscriptions.length - 1
@@ -48,13 +48,13 @@ const TableOne = ({subscriptions}) => {
               <div className="flex-shrink-0">
                 {/* data here */}
               </div>
-              <p className="hidden text-black dark:text-white sm:block">
+              <p className="hidden text-black dark:text-gray-900 sm:block">
                 {subscription?.partner?.name}
               </p>
             </div>
 
             <div className="flex items-center justify-center p-2.5 xl:p-5">
-              <p className="text-black dark:text-white">R{subscription.amount}</p>
+              <p className="text-black dark:text-gray-900">R{subscription.amount}</p>
             </div>
 
             <div className="flex items-center justify-center p-2.5 xl:p-5">
@@ -62,7 +62,7 @@ const TableOne = ({subscriptions}) => {
             </div>
 
             <div className="hidden items-center justify-center p-2.5 sm:flex xl:p-5">
-              <p className="text-black dark:text-white">{subscription.subscriptionTier}</p>
+              <p className="text-black dark:text-gray-900">{subscription.subscriptionTier}</p>
             </div>
           </div>
         ))}

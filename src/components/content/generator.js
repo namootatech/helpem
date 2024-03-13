@@ -21,7 +21,7 @@ const multiTextBlock = (config) => (
                 <h2 className={theme?.section?.header?.class}>
                     {item.title}
                 </h2>
-                <p className=" text-base/loose text-2xl md:text-2xl lg:text-2xl dark:text-white mb-4">
+                <p className=" text-base/loose text-2xl md:text-2xl lg:text-2xl dark:text-gray-900 mb-4">
                     {item.text}
                 </p>
             </React.Fragment>
@@ -61,7 +61,7 @@ const articleBuilder = (article) => {
 const spaBuilder = (spa) => {
     return (
         <div className={`h-full w-full px-10 py-10 px-10 text-center md:text-left ${spa?.bg} ${spa?.fg} text-center`}>
-            <h2 className=" text-6xl mb-4 text-center mt-4 font-extrabold leading-none tracking-tight dark:text-white">
+            <h2 className=" text-6xl mb-4 text-center mt-4 font-extrabold leading-none tracking-tight dark:text-gray-900">
                 {spa?.title}
             </h2>
             <br />
@@ -90,15 +90,15 @@ const heroBuilder = (config) => {
         <div className={`container h-full bg-[url('/images/${theme?.themeName}/${config.image}')] home-page-header flex flex-col justify-center items-center`}>
             <div className="grid md:grid-cols-2 grid-cols-1 flex flex-col justify-center items-center">
                 <div className="h-full px-8 py-8 text-center md:text-left">
-                    <h1 className="white-text text-red-700 text-4xl mb-4 font-extrabold leading-none tracking-tight text-gray-900 dark:text-white">
+                    <h1 className="white-text text-red-700 text-4xl mb-4 font-extrabold leading-none tracking-tight text-gray-900 dark:text-gray-900">
                         {config?.header}
                     </h1>
                     {config?.subHeader && (
-                        <h2 className="white-text text-2xl mb-4 font-extrabold leading-none tracking-tight text-gray-900 dark:text-white">
+                        <h2 className="white-text text-2xl mb-4 font-extrabold leading-none tracking-tight text-gray-900 dark:text-gray-900">
                             {config?.subHeader}
                         </h2>
                     )}
-                    <p className="text-white text-base/loose text-2xl md:text-2xl lg:text-2xl dark:text-white mb-6">
+                    <p className="text-gray-900 text-base/loose text-2xl md:text-2xl lg:text-2xl dark:text-gray-900 mb-6">
                         {config?.text}
                     </p>
                     <Link
@@ -115,7 +115,7 @@ const heroBuilder = (config) => {
 
 const fullWidthTextBlock = (config) => (
     <div key={`section-${config.title}`}>
-        <h1 class="max-w-lg text-3xl font-semibold leading-normal text-gray-900 dark:text-white mb-2">{config?.title}</h1>
+        <h1 class="max-w-lg text-3xl font-semibold leading-normal text-gray-900 dark:text-gray-900 mb-2">{config?.title}</h1>
         <div class="text-left text-2xl dark:text-gray-400 mt-2 mb-12" dangerouslySetInnerHTML={{ __html: nl2br(config?.text) }} />
     </div>
 )

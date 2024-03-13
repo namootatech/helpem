@@ -11,7 +11,7 @@ const SidebarLinkGroup = ({
     setOpen(!open);
   };
 
-  return <li className="text-white">{children(handleClick, open)}</li>;
+  return <li className="text-gray-900">{children(handleClick, open)}</li>;
 };
 
 export default SidebarLinkGroup;

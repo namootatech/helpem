@@ -18,7 +18,7 @@ const DatePickerOne = () => {
 
   return (
     <div>
-      <label className="mb-3 block text-sm font-medium text-black dark:text-white">
+      <label className="mb-3 block text-sm font-medium text-black dark:text-gray-900">
         Date picker
       </label>
       <div className="relative">

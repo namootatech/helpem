@@ -77,7 +77,7 @@
 
 .apexcharts-xaxistooltip,
 .apexcharts-yaxistooltip {
-    @apply dark:!border-meta-4 dark:!bg-meta-4 dark:!text-white;
+    @apply dark:!border-meta-4 dark:!bg-meta-4 dark:!text-gray-900;
 }
 
 .apexcharts-xaxistooltip-bottom:after {
@@ -89,7 +89,7 @@
 }
 
 .apexcharts-xaxistooltip-bottom {
-    @apply !rounded !border-none !bg-gray !text-xs !font-medium !text-black dark:!text-white;
+    @apply !rounded !border-none !bg-gray !text-xs !font-medium !text-black dark:!text-gray-900;
 }
 
 .apexcharts-tooltip-series-group {
@@ -123,7 +123,7 @@
 
 .flatpickr-months .flatpickr-prev-month,
 .flatpickr-months .flatpickr-next-month {
-    @apply !top-7 dark:!fill-white dark:!text-white;
+    @apply !top-7 dark:!fill-white dark:!text-gray-900;
 }
 
 .flatpickr-months .flatpickr-prev-month.flatpickr-prev-month,
@@ -138,7 +138,7 @@
 
 span.flatpickr-weekday,
 .flatpickr-months .flatpickr-month {
-    @apply dark:!fill-white dark:!text-white;
+    @apply dark:!fill-white dark:!text-gray-900;
 }
 
 .flatpickr-day.inRange {
@@ -165,7 +165,7 @@ span.flatpickr-weekday,
 .flatpickr-day.startRange,
 .flatpickr-day.selected,
 .flatpickr-day.endRange {
-    @apply dark:!text-white;
+    @apply dark:!text-gray-900;
 }
 
 .flatpickr-day.selected,
@@ -197,7 +197,7 @@ span.flatpickr-weekday,
 }
 
 .map-btn .jvm-zoom-btn {
-    @apply flex h-7.5 w-7.5 items-center justify-center rounded border border-stroke bg-white px-0 pb-0.5 pt-0 text-2xl leading-none text-body hover:border-primary hover:bg-primary hover:text-white dark:border-strokedark dark:bg-meta-4 dark:text-bodydark dark:hover:border-primary dark:hover:bg-primary dark:hover:text-white;
+    @apply flex h-7.5 w-7.5 items-center justify-center rounded border border-stroke bg-white px-0 pb-0.5 pt-0 text-2xl leading-none text-body hover:border-primary hover:bg-primary hover:text-gray-900 dark:border-strokedark dark:bg-meta-4 dark:text-bodydark dark:hover:border-primary dark:hover:bg-primary dark:hover:text-gray-900;
 }
 
 .mapOne .jvm-zoom-btn {

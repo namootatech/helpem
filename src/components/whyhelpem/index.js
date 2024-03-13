@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 const WhyHelpEm = ({theme}) => {
   return (
     <div className={`h-full w-full px-10 py-10 px-10 text-center md:text-left ${theme?.spaSection?.bg} ${theme?.spaSection?.fg} text-center`}>
-      <h2 className=" text-6xl mb-4 text-center mt-4 font-extrabold leading-none tracking-tight dark:text-white">
+      <h2 className=" text-6xl mb-4 text-center mt-4 font-extrabold leading-none tracking-tight dark:text-gray-900">
         {theme?.spaSection?.title}
       </h2>
       <br />

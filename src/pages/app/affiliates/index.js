@@ -25,7 +25,7 @@ const AffiliatesPage = ({user}) => {
     console.log('User', user?._id)
     if (user) {
       console.log('Fetching affiliates from' ,`${process.env.NEXT_PUBLIC_API_URL}/api/user/affiliates?id=${user?._id}`);
-      fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/user/affiliates?id=${user?._id}`)
+      fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/affiliates?id=${user?._id}`)
         .then((res) => res.json())
         .then((data) => {
           console.log('Affiliates', data);

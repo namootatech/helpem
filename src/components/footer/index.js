@@ -8,17 +8,17 @@ const Footer = ({theme}) => {
         <div class="md:flex md:justify-between">
           <div class="mb-6 md:mb-0">
             <Link href="/" class="flex items-center">
-              <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
+              <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-gray-900">
                {theme?.partnerName}
               </span>
             </Link>
           </div>
           <div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
             <div>
-              <h2 class="mb-6 text-sm font-semibold text-white-900 uppercase dark:text-white">
+              <h2 class="mb-6 text-sm font-semibold text-gray-900-900 uppercase dark:text-gray-900">
                 Resources
               </h2>
-              <ul class="text-white-500 dark:text-white-400 font-medium">
+              <ul class="text-gray-900-500 dark:text-gray-900-400 font-medium">
                 <li class="mb-4">
                   <Link href="https://flowbite.com/" class="hover:underline">
                   {theme?.partnerName}
@@ -32,10 +32,10 @@ const Footer = ({theme}) => {
               </ul>
             </div>
             <div>
-              <h2 class="mb-6 text-sm font-semibold text-white-900 uppercase dark:text-white">
+              <h2 class="mb-6 text-sm font-semibold text-gray-900-900 uppercase dark:text-gray-900">
                 Follow us
               </h2>
-              <ul class="text-white-500 dark:text-white-400 font-medium">
+              <ul class="text-gray-900-500 dark:text-gray-900-400 font-medium">
                 <li class="mb-4">
                   <Link
                     href="https://github.com/themesberg/flowbite"
@@ -55,10 +55,10 @@ const Footer = ({theme}) => {
               </ul>
             </div>
             <div>
-              <h2 class="mb-6 text-sm font-semibold text-white-900 uppercase dark:text-white">
+              <h2 class="mb-6 text-sm font-semibold text-gray-900-900 uppercase dark:text-gray-900">
                 Legal
               </h2>
-              <ul class="text-white-500 dark:text-white-400 font-medium">
+              <ul class="text-gray-900-500 dark:text-gray-900-400 font-medium">
                 <li class="mb-4">
                   <Link href="#" class="hover:underline">
                     Privacy Policy
@@ -75,7 +75,7 @@ const Footer = ({theme}) => {
         </div>
         <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
         <div class="sm:flex sm:items-center sm:justify-between">
-          <span class="text-sm text-white-500 sm:text-center dark:text-white-400">
+          <span class="text-sm text-gray-900-500 sm:text-center dark:text-gray-900-400">
             © 2023{" "}
             <Link href="https://flowbite.com/" class="hover:underline">
               Help'em™
@@ -85,7 +85,7 @@ const Footer = ({theme}) => {
           <div class="flex mt-4 space-x-5 sm:justify-center sm:mt-0">
             <Link
               href="#"
-              class="text-white-500 hover:text-white-900 dark:hover:text-white"
+              class="text-gray-900-500 hover:text-gray-900-900 dark:hover:text-gray-900"
             >
               <svg
                 class="w-4 h-4"
@@ -104,7 +104,7 @@ const Footer = ({theme}) => {
             </Link>
             <Link
               href="#"
-              class="text-white-500 hover:text-white-900 dark:hover:text-white"
+              class="text-gray-900-500 hover:text-gray-900-900 dark:hover:text-gray-900"
             >
               <svg
                 class="w-4 h-4"
@@ -119,7 +119,7 @@ const Footer = ({theme}) => {
             </Link>
             <Link
               href="#"
-              class="text-white-500 hover:text-white-900 dark:hover:text-white"
+              class="text-gray-900-500 hover:text-gray-900-900 dark:hover:text-gray-900"
             >
               <svg
                 class="w-4 h-4"
@@ -138,7 +138,7 @@ const Footer = ({theme}) => {
             </Link>
             <Link
               href="#"
-              class="text-white-500 hover:text-white-900 dark:hover:text-white"
+              class="text-gray-900-500 hover:text-gray-900-900 dark:hover:text-gray-900"
             >
               <svg
                 class="w-4 h-4"
@@ -157,7 +157,7 @@ const Footer = ({theme}) => {
             </Link>
             <Link
               href="#"
-              class="text-white-500 hover:text-white-900 dark:hover:text-white"
+              class="text-gray-900-500 hover:text-gray-900-900 dark:hover:text-gray-900"
             >
               <svg
                 class="w-4 h-4"
