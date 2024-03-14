@@ -1,9 +1,9 @@
 // api/monitoring/route.ts
-export default async function POST(req) {
+export default async function POST(req, res) {
   try {
     
     if (!req.body) {
-      return Response.json(
+      return res.json(
         { error: "Error can't be tunneled because the body is empty." },
         { status: 400 }
       );
@@ -16,7 +16,7 @@ export default async function POST(req) {
 
     const dsn = new URL(header.dsn);
     if (dsn.hostname !== process.env.SENTRY_HOST) {
-      return Response.json(
+      return res.json(
         { error: `Invalid Sentry host: ${dsn.hostname}` },
         { status: 400 }
       );
@@ -24,7 +24,7 @@ export default async function POST(req) {
 
     const project_id = dsn.pathname.substring(1);
     if (project_id !== process.env.SENTRY_PROJECT_ID) {
-      return Response.json(
+      return res.json(
         { error: `Invalid Project ID: ${project_id}` },
         { status: 400 }
       );
@@ -40,7 +40,7 @@ export default async function POST(req) {
       },
     });
   } catch (e) {
-    return Response.json(
+    return res.json(
       {
         error: "Could not tunnel Sentry error correctly.",
         data: e.message,
@@ -49,6 +49,6 @@ export default async function POST(req) {
     );
   }
 
-  return Response.json({ message: "Error sent." }, { status: 200 });
+  return res.json({ message: "Error sent." }, { status: 200 });
 }
 
