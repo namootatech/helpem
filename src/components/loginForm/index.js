@@ -58,7 +58,7 @@ const SubscriptionForm = ({ login }) => {
           console.log(cookies)
           console.log(cookies.get('user'))
           document.cookie = "user="+JSON.stringify(response.data);
-          router.push("/app");
+          window.location.href = "/app";
         }
       })
       .catch((error) => {
