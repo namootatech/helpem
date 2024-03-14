@@ -9,7 +9,8 @@ export default async function POST(req, res) {
       );
     }
 
-    const envelope = await req.text();
+    const envelope = req.body;
+
 
     const piece = envelope.split("\n")[0];
     const header = JSON.parse(piece);
