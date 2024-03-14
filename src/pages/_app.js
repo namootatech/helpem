@@ -4,9 +4,14 @@ import { Provider } from 'react-redux';
 import store from '@/store';
 import { getThemeConfig } from '@/themes';
 import Script from 'next/script';
+import { hotjar } from 'react-hotjar'
+import { useEffect } from 'react'
 
 export default function MyApp({ Component, pageProps }) {
   const theme = getThemeConfig();
+  useEffect(() => {
+    hotjar.initialize(3906314, 6)
+  }, [])
   return (
     <>
       <Script
