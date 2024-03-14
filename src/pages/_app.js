@@ -4,33 +4,42 @@ import { Provider } from 'react-redux';
 import store from '@/store';
 import { getThemeConfig } from '@/themes';
 import Script from 'next/script';
-import { hotjar } from 'react-hotjar'
-import { useEffect } from 'react'
-
+import { hotjar } from 'react-hotjar';
+import { useEffect } from 'react';
+import * as gtag from '@/lib/gtag'
+import { useRouter } from 'next/router'
 export default function MyApp({ Component, pageProps }) {
   const theme = getThemeConfig();
+  const router = useRouter()
   useEffect(() => {
-    hotjar.initialize(3906314, 6)
-  }, [])
+    hotjar.initialize(3906314, 6);
+  }, []);
+
+  useEffect(() => {
+    const handleRouteChange = url => {
+      gtag.pageview(url)
+    }
+    router.events.on('routeChangeComplete', handleRouteChange)
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChange)
+    }
+  }, [router.events])
   return (
     <>
-      <Script
-        strategy='lazyOnload'
-        id='google-analytics'
+      <script
+        async
         src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
-      />
+      ></script>
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `
+   window.dataLayer = window.dataLayer || [];
+   function gtag(){dataLayer.push(arguments);}
+   gtag('js', new Date());
+   gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}');`,
+        }}
+      ></script>
 
-      <Script strategy='lazyOnload' id="google-analytics-2" >
-        {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}',{
-          page_path: window.location.pathname,
-          
-![image](https://cdn.sanity.io/images/dgsq0x0m/production/61f24596fb210134e5df6a1dfa285de0f24791cc-1549x601.png?w=450)});
-         `}
-      </Script>
       <Provider store={store}>
         <NextNProgress color={theme.progressColor} />
         <Component {...pageProps} />;
