@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import { useEffect, useState } from "react";
 import { getThemeConfig } from "@/themes"
 
+
 const Layout = ({ children, saveTheme, theme }) => {
   useEffect(() => {
     saveTheme(getThemeConfig());

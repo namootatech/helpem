@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@sentry/nextjs": "^7.107.0",
     "apexcharts": "^3.45.2",
     "autoprefixer": "10.4.16",
     "axios": "^1.6.2",

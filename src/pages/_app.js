@@ -3,6 +3,7 @@ import NextNProgress from "nextjs-progressbar";
 import { Provider } from "react-redux";
 import store from "@/store";
 import { getThemeConfig } from "@/themes";
+
 export default function MyApp({ Component, pageProps }) {
   const theme = getThemeConfig()
   return (
