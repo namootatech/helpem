@@ -3,6 +3,7 @@
 // https://docs.sentry.io/platforms/javascript/guides/nextjs/
 
 import * as Sentry from "@sentry/nextjs";
+import { ProfilingIntegration } from "@sentry/profiling-node";
 
 Sentry.init({
   dsn: "https://430d80276aa0c77279f7df881a8ca7ef@o4506910441865216.ingest.us.sentry.io/4506910446583808",
@@ -19,4 +20,8 @@ Sentry.init({
   _experiments: {
     metricsAggregator: true,
   },
+  integrations: [
+    // Add profiling integration to list of integrations
+    new ProfilingIntegration(),
+  ],
 });
