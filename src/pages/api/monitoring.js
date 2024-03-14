@@ -53,3 +53,12 @@ export default async function POST(req, res) {
   return res.json({ message: "Error sent." }, { status: 200 });
 }
 
+export const config = {
+  api: {
+    bodyParser: {
+      sizeLimit: '8mb',
+    },
+  },
+  // Specifies the maximum allowed duration for this function to execute (in seconds)
+  maxDuration: 60,
+}
