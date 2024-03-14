@@ -27,12 +27,12 @@ export default async function POST(req, res) {
     }
 
     const project_id = dsn.pathname.substring(1);
-    if (project_id !== process.env.SENTRY_PROJECT_ID) {
-      return res.json(
-        { error: `Invalid Project ID: ${project_id}` },
-        { status: 400 }
-      );
-    }
+    // if (project_id !== process.env.SENTRY_PROJECT_ID) {
+    //   return res.json(
+    //     { error: `Invalid Project ID: ${project_id}` },
+    //     { status: 400 }
+    //   );
+    // }
 
     const url = `https://${process.env.SENTRY_HOST}/api/${project_id}/envelope/`;
     console.log("URL", url);
