@@ -20,6 +20,7 @@ module.exports = withSentryConfig(
     silent: true,
     org: "helpem",
     project: "javascript-nextjs",
+    authToken: process.env.SENTRY_AUTH_TOKEN
   },
   {
     // For all available options, see:
@@ -34,7 +35,7 @@ module.exports = withSentryConfig(
     // Routes browser requests to Sentry through a Next.js rewrite to circumvent ad-blockers. (increases server load)
     // Note: Check that the configured route will not match with your Next.js middleware, otherwise reporting of client-
     // side errors will fail.
-    tunnelRoute: "/monitoring",
+    tunnelRoute: "/api/monitoring",
 
     // Hides source maps from generated client bundles
     hideSourceMaps: true,
