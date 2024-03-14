@@ -1,5 +1,5 @@
 // api/monitoring/route.ts
-export async function POST(req) {
+export default async function POST(req) {
   try {
     if (!req.body) {
       return Response.json(
