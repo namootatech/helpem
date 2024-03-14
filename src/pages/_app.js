@@ -11,10 +11,11 @@ export default function MyApp({ Component, pageProps }) {
     <>
       <Script
         strategy='lazyOnload'
+        id='google-analytics'
         src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
       />
 
-      <Script strategy='lazyOnload'>
+      <Script strategy='lazyOnload' id="google-analytics-2" >
         {`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
