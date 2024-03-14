@@ -1,6 +1,7 @@
 // api/monitoring/route.ts
 export default async function POST(req) {
   try {
+    
     if (!req.body) {
       return Response.json(
         { error: "Error can't be tunneled because the body is empty." },
@@ -30,6 +31,7 @@ export default async function POST(req) {
     }
 
     const url = `https://${process.env.SENTRY_HOST}/api/${project_id}/envelope/`;
+    console.log("URL", url);
     await fetch(url, {
       method: "POST",
       body: envelope,
