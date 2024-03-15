@@ -32,11 +32,21 @@ function ReturnPage({theme}) {
         setSuccess(true);
         setLoading(false);
         setHasSubmitted(true)
+        axios.post('/api/send-notifications', userData)
+        .then((res) => {
+          console.log('Notification sent');
+        }
+        )
+        .catch((err) => {
+          console.log('Notification failed');
+          throw err;
+        });
       })
       .catch((err) => {
         setFailedToSubmit(true);
         setLoading(false);
       });
+      
     }
   }, [userData]);
 
