@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Sidebar from "@/components/SideBar";
-import Header from "@/components/Header/dashboard";
+import Header from "@/components/header/dashboard";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import { connect } from "react-redux";
