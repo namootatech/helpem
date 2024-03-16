@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { keys } from "ramda";
 import axios from "axios";
 import { useRouter } from "next/router";
+import { useSearchParams  } from "next/navigation";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 const levelPrices = {
@@ -21,6 +22,8 @@ const levelPrices = {
 
 const SubscriptionForm = ({user, theme}) => {
   const router = useRouter();
+  const params = useSearchParams();
+  const parent = params.get('parent');
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -30,7 +33,8 @@ const SubscriptionForm = ({user, theme}) => {
     agreeToTerms: false,
     subscriptionTier: "Nourisher",
     amount: 50,
-    partner: {name: theme?.partnerName, slug : theme?.themeName}
+    partner: {name: theme?.partnerName, slug : theme?.themeName},
+    parent: parent
   });
 
   const [loading , setLoading] = useState(false);
