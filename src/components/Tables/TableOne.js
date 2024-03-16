@@ -4,19 +4,19 @@ import { connect } from 'react-redux';
 
 const TableOne = ({ subscriptions }) => {
   return (
-    <div className='rounded-sm md:border md:border-stroke bg-white md:px-5 pb-2.5 pt-6 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1'>
+    <div className='rounded-sm md:border md:border-stroke md:px-5 pb-2.5 pt-6 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1'>
       <h4 className='mb-6 text-xl font-semibold text-black dark:text-gray-900'>
         Your subscriptions
       </h4>
 
       <div className='flex flex-col'>
-        <table className='md:hidden shadow-lg rounded rounded-lg bg-gray-2 dark:bg-meta-4 grid grid grid-cols-1 w-full'>
+        <table className='md:hidden md:shadow-lg rounded rounded-lg dark:bg-meta-4 grid grid grid-cols-1 w-full'>
           <tbody className='w-full grid grid-cols-1'>
             {subscriptions?.map((subscription, key) => (
               <div
-                className={` w-full grid grid-cols-1${
+                className={` shadow-lg my-4 w-full grid grid-cols-1${
                   key === subscriptions.length - 1
-                    ? ''
+                    ? '' 
                     : 'border-b border-stroke dark:border-strokedark'
                 }`}
                 key={key}
@@ -126,6 +126,22 @@ const TableOne = ({ subscriptions }) => {
               </tr>
             ))}
           </tbody>
+          <tfoot className='bg-gray-50 white-text rounded rounded-lg'>
+          <tr class='text-gray-900 bg-gray-50 dark:bg-gray-800 dark:border-gray-700 grid gap-4 grid-cols-5 '>
+            <th scope='row' class=' px-6 py-3 text-base'>
+              Total
+            </th>
+            <td class=' px-6 py-3'>
+              R
+              {subscriptions?.reduce(
+                (acc, curr) => acc + parseFloat(curr.amount),
+                0
+              )}
+            </td>
+            <td></td>
+            <td class=' px-6 py-3'></td>
+          </tr>
+        </tfoot>
         </table>
       </div>
     </div>

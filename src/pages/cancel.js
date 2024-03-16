@@ -44,7 +44,7 @@ function ReturnPage({ theme }) {
     merchant_id: MERCHANT_ID,
     merchant_key: MERCHANT_KEY,
     return_url: `${WEBSITE_URL}/return?firstPaymentDone=true`,
-    cancel_url: `${WEBSITE_URL}/cancel?subscriptionTier=${userData.subscriptionTier}&amount=${levelPrices[userData.subscriptionTier]}&firstName=${userData.firstName}&lastName=${userData.lastName}&email=${userData.email}&paymentMethod=${userData.paymentMethod}&agreeToTerms=${userData.agreeToTerms}&password=${userData.password}&confirmPassword=${userData.confirmPassword}&level=${keys(levelPrices).indexOf(userData.subscriptionTier) + 1}${userData?.parent ? `&parent=${userData?.parent}&` :''}`,
+    cancel_url: `${WEBSITE_URL}/cancel?subscriptionId=${userData.subscriptionId}&userId${userData.userId}&subscriptionTier=${userData.subscriptionTier}&amount=${levelPrices[userData.subscriptionTier]}&firstName=${userData.firstName}&lastName=${userData.lastName}&email=${userData.email}&paymentMethod=${userData.paymentMethod}&agreeToTerms=${userData.agreeToTerms}&level=${keys(levelPrices).indexOf(userData.subscriptionTier) + 1}${userData?.parent ? `&parent=${userData?.parent}&` :''}&partner=${userData?.partner.slug}`,
     notify_url: `${API_URL}/notify`,
     name_first: userData.firstName,
     name_last: userData.lastName,
@@ -61,6 +61,10 @@ function ReturnPage({ theme }) {
     subscription_notify_email: true,
     subscription_notify_webhook: true,
     subscription_notify_buyer: true,
+    custom_str2: userData?.userId ? userData?.userId : '',
+    custom_str3: userData?.subscriptionId ? userData?.subscriptionId : '',
+    custom_str4: userData?.partner?.slug ? userData?.partner?.slug : '',
+    ustom_str5: userData?.subscriptionTier ? userData?.subscriptionTier : '',
   };
 
   if (userData?.parent) {
