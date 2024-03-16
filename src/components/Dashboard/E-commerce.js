@@ -168,10 +168,10 @@ const ECommerce = ({ userData }) => {
   useEffect(() => {
     if (userData) {
       console.log("setting defaults", userData)
-      const selectedPartner = userData.subscriptions[0]?.partner;
+      const selectedPartner = userData?.subscriptions[0]?.partner;
       setSelectedPartner(selectedPartner)
-      const subscription = userData.subscriptions[0]
-      const subscriptionTier = subscription.subscriptionTier;
+      const subscription = userData?.subscriptions[0]
+      const subscriptionTier = subscription?.subscriptionTier;
       setSubscriptionTier(subscriptionTier);
       setPaymentSubscription(subscription);
     }},[userData])
