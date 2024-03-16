@@ -166,7 +166,7 @@ const ECommerce = ({ userData }) => {
   }, [paymentComplete, cancelled]);
 
   useEffect(() => {
-    if (userData) {
+    if (userData?.user) {
       console.log("setting defaults", userData)
       const selectedPartner = userData?.subscriptions[0]?.partner;
       setSelectedPartner(selectedPartner)
