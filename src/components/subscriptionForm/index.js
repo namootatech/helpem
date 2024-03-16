@@ -1,17 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { postToURL } from "../payfast/payfast";
-import { v4 as uuidv4 } from 'uuid';
+import { connect } from "react-redux";
 import { keys } from "ramda";
-import moment from "moment";
-import { useSearchParams } from "next/navigation";
+import axios from "axios";
+import { useRouter } from "next/router";
 
-const PAYFAST_URL = process.env.NEXT_PUBLIC_PAYFAST_URL;
-const WEBSITE_URL = process.env.NEXT_PUBLIC_WEBSITE_URL;
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
-const MERCHANT_ID = process.env.NEXT_PUBLIC_MERCHANT_ID;
-const MERCHANT_KEY = process.env.NEXT_PUBLIC_MERCHANT_KEY;
-
 const levelPrices = {
   Nourisher: 50,
   CaringPartner: 100,
@@ -25,7 +19,8 @@ const levelPrices = {
   GlobalImpactVisionary: 10000,
 };
 
-const SubscriptionForm = ({user}) => {
+const SubscriptionForm = ({user, theme}) => {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -34,58 +29,52 @@ const SubscriptionForm = ({user}) => {
     confirmPassword: null,
     agreeToTerms: false,
     subscriptionTier: "Nourisher",
+    amount: 50,
+    partner: {name: theme?.partnerName, slug : theme?.themeName}
   });
 
+  const [loading , setLoading] = useState(false);
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [termsError, setTermsError] = useState("");
   const [canSubmit, setCanSubmit] = useState(false);
+  const [error, setError] = useState(null);
 
   const handleInputChange = (e) => {
     console.log(e.target.name, e.target.value);
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    if(e.target.name === 'subscriptionTier'){
+      setFormData({
+        ...formData,
+        [e.target.name]: e.target.value,
+        amount: levelPrices[e.target.value]
+      });
+    }
+    else{
+      setFormData({
+        ...formData,
+        [e.target.name]: e.target.value,
+      });
+    }
+    
   };
-  console.log(user)
+
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    const paymentId = uuidv4();
-    let data = {
-      merchant_id: MERCHANT_ID,
-      merchant_key: MERCHANT_KEY,
-      return_url: `${WEBSITE_URL}/subscribe/return?subscriptionTier=${formData.subscriptionTier}&amount=${levelPrices[formData.subscriptionTier]}&firstName=${formData.firstName}&lastName=${formData.lastName}&email=${formData.email}&paymentMethod=${formData.paymentMethod}&agreeToTerms=${formData.agreeToTerms}&password=${formData.password}&confirmPassword=${formData.confirmPassword}&paymentId=${paymentId}&level=${keys(levelPrices).indexOf(formData.subscriptionTier) + 1}${user?.parent ? `&parent=${user?.parent}&` :''}`,
-      cancel_url:`${WEBSITE_URL}/subscribe/cancel`,
-      notify_url: `${API_URL}/notify`,
-      name_first: formData.firstName,
-      name_last: formData.lastName,
-      email_address: formData.email,
-      m_payment_id: paymentId,
-      amount: levelPrices[formData.subscriptionTier],
-      item_name: `Helpem Subscription`,
-      item_description: `Helpem Subscription for ${formData.firstName} ${formData.lastName} for the ${formData.subscriptionTier} package.`,
-      subscription_type: 1,
-      billing_date: moment().format("YYYY-MM-DD"),
-      recurring_amount: levelPrices[formData.subscriptionTier],
-      frequency: 3,
-      cycles: 12,
-      subscription_notify_email: true,
-      subscription_notify_webhook: true,
-      subscription_notify_buyer: true,
-    }
-
-    if(user?.parent){
-      data = {
-        ...data,
-        custom_str1: user?.parent ? user?.parent : '',
-      }
-    }
-
-    postToURL(PAYFAST_URL, data);
+    console.log("saving formData", formData);
+    axios
+      .post(`${API_URL}/register`, formData)
+      .then((res) => {
+        console.log("user saved successfully", res.data);
+        setLoading(false);
+        router.push(`/return?firstPaymentDone=false&subscriptionTier=${formData.subscriptionTier}&amount=${levelPrices[formData.subscriptionTier]}&firstName=${formData.firstName}&lastName=${formData.lastName}&email=${formData.email}&paymentMethod=${formData.paymentMethod}&agreeToTerms=${formData.agreeToTerms}&password=${formData.password}&confirmPassword=${formData.confirmPassword}&level=${keys(levelPrices).indexOf(formData.subscriptionTier) + 1}${formData?.parent ? `&parent=${formData?.parent}&` :''}`);
+      })
+      .catch((err) => {
+        console.log("error saving user", err);
+        setLoading(false);
+        setError(err.message)
+      });
   };
-
-  
 
   const toggleTerms = () => {
     setFormData({
@@ -125,6 +114,16 @@ const SubscriptionForm = ({user}) => {
       setCanSubmit(true);
     }
   });
+
+  useEffect(() => {
+    if (theme) {
+      setFormData({
+        ...formData,
+        partner: {name: theme?.partnerName, slug : theme?.themeName}
+      });
+    }
+  }, [theme]);
+
   return (
     <div className="md:w-9/12 p-8 mx-auto bg-white rounded-lg shadow-md">
       <h1 className="text-2xl font-semibold mb-4 text-4xl">
@@ -282,6 +281,7 @@ const SubscriptionForm = ({user}) => {
           <br />
         </div>
         {termsError && <p className="text-red-500">{termsError}</p>}
+        {error && <p className="text-red-500">{error}</p>}
         <br />
         {canSubmit && (
           <>
@@ -331,4 +331,10 @@ const SubscriptionForm = ({user}) => {
   );
 };
 
-export default SubscriptionForm;
+const mapStateToProps = (state) => {
+  return {
+    theme: state.theme
+  }
+}
+
+export default connect(mapStateToProps)(SubscriptionForm);
