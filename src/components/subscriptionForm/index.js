@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { connect } from "react-redux";
-import { keys } from "ramda";
+import { assoc, keys } from "ramda";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { useSearchParams  } from "next/navigation";
@@ -24,6 +24,7 @@ const SubscriptionForm = ({user, theme}) => {
   const router = useRouter();
   const params = useSearchParams();
   const parent = params.get('parent');
+  console.log("Parent", parent);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -67,11 +68,11 @@ const SubscriptionForm = ({user, theme}) => {
     e.preventDefault();
     console.log("saving formData", formData);
     axios
-      .post(`${API_URL}/register`, formData)
+      .post(`${API_URL}/register`, assoc('parent', parent, formData))
       .then((res) => {
         console.log("user saved successfully", res.data);
         setLoading(false);
-        router.push(`/return?userId=${res.data.user}&firstPaymentDone=false&subscriptionTier=${formData.subscriptionTier}&amount=${levelPrices[formData.subscriptionTier]}&firstName=${formData.firstName}&lastName=${formData.lastName}&email=${formData.email}&paymentMethod=${formData.paymentMethod}&agreeToTerms=${formData.agreeToTerms}&password=${formData.password}&confirmPassword=${formData.confirmPassword}&level=${keys(levelPrices).indexOf(formData.subscriptionTier) + 1}${formData?.parent ? `&parent=${formData?.parent}&` :''}`);
+        router.push(`/return?userId=${res.data.user}&firstPaymentDone=false&subscriptionTier=${formData.subscriptionTier}&amount=${levelPrices[formData.subscriptionTier]}&firstName=${formData.firstName}&lastName=${formData.lastName}&email=${formData.email}&paymentMethod=${formData.paymentMethod}&agreeToTerms=${formData.agreeToTerms}&password=${formData.password}&confirmPassword=${formData.confirmPassword}&level=${keys(levelPrices).indexOf(formData.subscriptionTier) + 1}${parent ? `&parent=${parent}&` :''}`);
       })
       .catch((err) => {
         console.log("error saving user", err);
