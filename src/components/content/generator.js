@@ -123,11 +123,11 @@ const heroBuilder = ({ config }) => {
 
 const fullWidthTextBlock = ({ config }) => (
   <div key={`section-${config.title}`}>
-    <h1 class='max-w-lg text-3xl font-semibold leading-normal text-gray-900 dark:text-gray-900 mb-2'>
+    <h1 className='max-w-lg text-3xl font-semibold leading-normal text-gray-900 dark:text-gray-900 mb-2'>
       {config?.title}
     </h1>
     <div
-      class='text-left text-2xl dark:text-gray-400 mt-2 mb-12'
+      className='text-left text-2xl dark:text-gray-400 mt-2 mb-12'
       dangerouslySetInnerHTML={{ __html: nl2br(config?.text) }}
     />
   </div>
@@ -135,11 +135,11 @@ const fullWidthTextBlock = ({ config }) => (
 
 const centerWidthTextBlock = ({ config }) => (
   <div key={`section-${config.title} `} className='max-w-2xl mx-auto p-4'>
-    <h1 class='text-3xl font-semibold leading-normal text-gray-900 dark:text-gray-900 mb-2'>
+    <h1 className='text-3xl font-semibold leading-normal text-gray-900 dark:text-gray-900 mb-2'>
       {config?.title}
     </h1>
     <div
-      class='text-left text-2xl dark:text-gray-400 mt-2 mb-12'
+      className='text-left text-2xl dark:text-gray-400 mt-2 mb-12'
       dangerouslySetInnerHTML={{ __html: nl2br(config?.text) }}
     />
   </div>

@@ -267,7 +267,7 @@ const SubscriptionForm = ({user, theme}) => {
             />
           </div>
           <label
-            for="terms"
+            htmlFor="terms"
             className="ml-2 text-xl font-medium text-gray-900 dark:text-gray-300"
           >
             I agree with the{" "}
