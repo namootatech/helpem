@@ -56,7 +56,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
   return (
     <aside
       ref={sidebar}
-      className={`mt-4 absolute left-0 top-0 z-9999 flex h-screen w-72.5 flex-col overflow-y-hidden bg-gray-900duration-300 ease-linear dark:bg-boxdark lg:static lg:translate-x-0 ${
+      className={`absolute left-0 top-0 z-50 flex h-screen w-72.5 flex-col overflow-y-hidden bg-white shadow-md duration-300 ease-linear dark:bg-boxdark lg:static lg:translate-x-0 ${
         sidebarOpen ? "translate-x-0" : "-translate-x-full"
       }`}
     >
@@ -187,7 +187,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                                 pathname === "/" && "text-gray-900"
                               }`}
                             >
-                              eCommerce
+                              Home
                             </Link>
                           </li>
                         </ul>
@@ -273,7 +273,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                       </clipPath>
                     </defs>
                   </svg>
-                  Settings
+                  Profile
                 </Link>
               </li>
               {/* <!-- Menu Item Settings --> */}

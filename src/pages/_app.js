@@ -6,24 +6,26 @@ import { getThemeConfig } from '@/themes';
 import Script from 'next/script';
 import { hotjar } from 'react-hotjar';
 import { useEffect } from 'react';
-import * as gtag from '@/lib/gtag'
-import { useRouter } from 'next/router'
+import * as gtag from '@/lib/gtag';
+import { useRouter } from 'next/router';
+import { CookiesProvider } from 'react-cookie';
+
 export default function MyApp({ Component, pageProps }) {
   const theme = getThemeConfig();
-  const router = useRouter()
+  const router = useRouter();
   useEffect(() => {
     hotjar.initialize(3906314, 6);
   }, []);
 
   useEffect(() => {
-    const handleRouteChange = url => {
-      gtag.pageview(url)
-    }
-    router.events.on('routeChangeComplete', handleRouteChange)
+    const handleRouteChange = (url) => {
+      gtag.pageview(url);
+    };
+    router.events.on('routeChangeComplete', handleRouteChange);
     return () => {
-      router.events.off('routeChangeComplete', handleRouteChange)
-    }
-  }, [router.events])
+      router.events.off('routeChangeComplete', handleRouteChange);
+    };
+  }, [router.events]);
   return (
     <>
       <script
@@ -41,8 +43,10 @@ export default function MyApp({ Component, pageProps }) {
       ></script>
 
       <Provider store={store}>
-        <NextNProgress color={theme.progressColor} />
-        <Component {...pageProps} />;
+        <CookiesProvider defaultSetOptions={{ path: '/' }}>
+          <NextNProgress color={theme.progressColor} />
+          <Component {...pageProps} />
+        </CookiesProvider>
       </Provider>
     </>
   );

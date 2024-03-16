@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { connect } from 'react-redux';
 import { useRouter } from 'next/navigation';
-import cookies from 'js-cookie';
+import { useCookies } from 'react-cookie';
 
 const SubscriptionForm = ({ login }) => {
+  const [cookies, setCookie] = useCookies(['user']);
+
   const router = useRouter();
   const [formData, setFormData] = useState({
     name: '',
@@ -62,12 +64,11 @@ const SubscriptionForm = ({ login }) => {
         } else {
           console.log("You have successfully loggedin.");
           login(response.data);
-          cookies.set('user', JSON.stringify(response.data));
+
           console.log("User data", response.data);
-          console.log(cookies)
-          console.log(cookies.get('user'))
-          document.cookie = "user="+JSON.stringify(response.data);
-          window.location.href = "/app";
+        
+          setCookie("user", JSON.stringify(response.data.user));
+          router.push("/app");
         }
       })
       .catch((error) => {
