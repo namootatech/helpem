@@ -63,6 +63,39 @@ const getPayFastData = (userData, subscriptionTier, selectedPartner, subscriptio
   return payfastData;
 }
 
+const getPayFastDataWithExistingToken = (userData, subscriptionTier, selectedPartner, subscriptionId, token) => {
+  const paymentId = uuidv4();
+  let payfastData = {
+    merchant_id: MERCHANT_ID,
+    merchant_key: MERCHANT_KEY,
+    return_url: `${WEBSITE_URL}/app?complete=true`,
+    cancel_url: `${WEBSITE_URL}/app?cancelled=true&subscriptionId=${subscriptionId}&userId${userData._id}&subscriptionTier=${subscriptionTier}&amount=${levelPrices[subscriptionTier]}&firstName=${userData.firstName}&lastName=${userData.lastName}&email=${userData.email}&paymentMethod=${userData.paymentMethod}&agreeToTerms=${userData.agreeToTerms}&level=${keys(levelPrices).indexOf(subscriptionTier) + 1}${userData?.parent ? `&parent=${userData?.parent}&` :''}&partner=${selectedPartner.slug}`,
+    notify_url: `${API_URL}/notify`,
+    name_first: userData.firstName,
+    name_last: userData.lastName,
+    email_address: userData.email,
+    m_payment_id: paymentId,
+    amount: levelPrices[subscriptionTier],
+    item_name: `Helpem Subscription`,
+    item_description: `Helpem Subscription for ${userData.firstName} ${userData.lastName} for the ${subscriptionTier} package at ${selectedPartner.name}`,
+    subscription_type: 1,
+    billing_date: moment().format('YYYY-MM-DD'),
+    recurring_amount: levelPrices[subscriptionTier],
+    frequency: 3,
+    cycles: 12,
+    subscription_notify_email: true,
+    subscription_notify_webhook: true,
+    subscription_notify_buyer: true,
+    custom_str1: userData?.parent ? userData?.parent : '',
+    custom_str2: userData?._id ? userData?._id: '',
+    custom_str3: subscriptionId  ? subscriptionId : '',
+    custom_str4: selectedPartner.slug,
+    custom_str5: subscriptionTier,
+    token: token,
+  };
+  return payfastData;
+}
+
 
 const ECommerce = ({ userData }) => {
   const params = useSearchParams();
@@ -78,6 +111,7 @@ const ECommerce = ({ userData }) => {
   const [selectedPartner, setSelectedPartner] = useState(null);
   const [loading, setLoading] = useState(false);
   const [subscription, setSubscription] = useState(null);
+  const [paymentSubscription, setPaymentSubscription] = useState(null);
 
   useEffect(() => {
     if(paymentComplete === "true") {
@@ -87,6 +121,17 @@ const ECommerce = ({ userData }) => {
       .then((response) => response.json())
       .then((data) => setPartners(data));
   }, [paymentComplete]);
+
+  useEffect(() => {
+    if (userData) {
+      console.log("setting defaults", userData)
+      const selectedPartner = userData.subscriptions[0]?.partner;
+      setSelectedPartner(selectedPartner)
+      const subscription = userData.subscriptions[0]
+      const subscriptionTier = subscription.subscriptionTier;
+      setSubscriptionTier(subscriptionTier);
+      setPaymentSubscription(subscription);
+    }},[userData])
 
   const isSubscribedToPartner = (partner) => {
     return userData?.subscriptions?.some(
@@ -114,8 +159,6 @@ const ECommerce = ({ userData }) => {
       level: keys(levelPrices).indexOf(subscriptionTier) + 1,
       amount: levelPrices[subscriptionTier],
     }
-
-    console.log("saving data", data)
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/subscriptions/add`, {
       method: 'POST',
       headers: {
@@ -125,25 +168,37 @@ const ECommerce = ({ userData }) => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log('Success:', data);
         setSubscription(data?.subscription?.insertedId)
         setShowCongratulationsModal(true);
         setLoading(false);
       })
       .catch((error) => {
-        console.error('Error:', error);
+        throw new Error('Error:', error);
       });
     
   };
 
   const makeFirstPayment = () => {
-    console.log("user data", userData)
-    console.log("subscription tier", subscriptionTier)
-    console.log("selected partner", selectedPartner)
-    console.log("subscription", subscription)
     const payfastData = getPayFastData(userData.user, subscriptionTier, selectedPartner, subscription);
-    console.log('payfastData', payfastData);
     postToURL(PAYFAST_URL, payfastData);
+  }
+
+  const handleMakeSubscriptionPayment = () => {
+    setLoading(true);
+    const transaction = userData.transactions.find(transaction => transaction.custom_str3 === paymentSubscription._id);
+    const subscriptionToken = transaction?.token;
+    if(subscriptionToken){
+      const payfastData = 
+        getPayFastDataWithExistingToken(
+          userData.user, 
+          subscriptionTier, 
+          selectedPartner, 
+          paymentSubscription._id, 
+          subscriptionToken);
+      postToURL(PAYFAST_URL, payfastData);
+    } else {
+      throw new Error("No subscription token found for subscription")  
+    }
   }
 
   return (
@@ -158,6 +213,7 @@ const ECommerce = ({ userData }) => {
           </button>
           <button
             type='button'
+            onClick={() => setShowPaymentModal(true)}
             class='text-gray-900 bg-[#F7BE38] hover:bg-[#F7BE38]/90 focus:ring-4 focus:outline-none focus:ring-[#F7BE38]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#F7BE38]/50 me-2 mb-2'
           >
             <svg
@@ -277,11 +333,42 @@ const ECommerce = ({ userData }) => {
           setShowModal={setShowPaymentModal}
           title='Make a payment'
         >
-          <div className='grid grid-cols-3 gap-2 bg-gray-50 border  p-4 flex items-center justify-center rounded rounded-lg shadow-lg my-2'>
-            <h1 className='text-sm font-bold'>Payment</h1>
-            <button class='rounded rounded-md text-gray-100 bg-red-800 flex items-center justify-center me-2 mb-2 p-2'>
+          <div>
+          <div className='grid grid-cols-1 gap-2 bg-gray-50 border  p-4 flex items-center justify-center rounded rounded-lg shadow-lg my-2'>
+            <h1 className='text-xl font-bold'>Select subscription</h1>
+            <p className='text-sm my-2'>For which subscription would you like to make a payment for?</p>
+            <select
+              id='subscription'
+              name='subscription'
+              className='rounded border p-2 w-full my-4'
+              onChange={(e) => {
+                const selectedPartner = userData.subscriptions.find(
+                  (subscription) => subscription._id === e.target.value
+                )
+                setSelectedPartner(selectedPartner.partner)
+                const subscription = userData.subscriptions.find(
+                  (subscription) => subscription._id === e.target.value
+                )
+                const subscriptionTier = subscription.subscriptionTier;
+                setSubscriptionTier(subscriptionTier);
+                setPaymentSubscription(subscription);
+              }}
+            >
+              {userData?.subscriptions?.map((subscription) => (
+                <option
+                  key={subscription._id}
+                  value={subscription._id}
+                  selected={paymentSubscription?._id === subscription._id}
+                >
+                  {subscription.partner.name} (R{subscription.amount}/month)
+                </option>
+              ))}
+            </select>
+
+            <button onClick={handleMakeSubscriptionPayment} class='my-4 rounded rounded-md text-gray-100 bg-red-800 flex items-center justify-center me-2 mb-2 p-2'>
               Pay
             </button>
+          </div>
           </div>
         </FreeModal>
         <FreeModal
