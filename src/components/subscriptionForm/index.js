@@ -72,7 +72,7 @@ const SubscriptionForm = ({user, theme}) => {
       .then((res) => {
         console.log("user saved successfully", res.data);
         setLoading(false);
-        router.push(`/return?partner=${formData.partner.slug}&subscriptionId=${res.data.insertedId}&userId=${res.data.user}&firstPaymentDone=false&subscriptionTier=${formData.subscriptionTier}&amount=${levelPrices[formData.subscriptionTier]}&firstName=${formData.firstName}&lastName=${formData.lastName}&email=${formData.email}&paymentMethod=${formData.paymentMethod}&agreeToTerms=${formData.agreeToTerms}&level=${keys(levelPrices).indexOf(formData.subscriptionTier) + 1}${parent ? `&parent=${parent}&` :''}`);
+        router.push(`/return?partner=${formData.partner.slug}&subscriptionId=${res.data.subscription}&userId=${res.data.user}&firstPaymentDone=false&subscriptionTier=${formData.subscriptionTier}&amount=${levelPrices[formData.subscriptionTier]}&firstName=${formData.firstName}&lastName=${formData.lastName}&email=${formData.email}&paymentMethod=${formData.paymentMethod}&agreeToTerms=${formData.agreeToTerms}&level=${keys(levelPrices).indexOf(formData.subscriptionTier) + 1}${parent ? `&parent=${parent}&` :''}`);
       })
       .catch((err) => {
         console.log("error saving user", err);
