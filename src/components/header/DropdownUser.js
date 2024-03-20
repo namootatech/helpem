@@ -4,13 +4,23 @@ import Image from 'next/image';
 import { connect } from 'react-redux';
 import cookies from 'js-cookie';
 import { useRouter } from "next/router";
+import { Avatar } from './avatar';
+
 
 const DropdownUser = ({ user }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [emailMd5, setEmailMd5] = useState('');
   const router = useRouter();
   const trigger = useRef(null);
   const dropdown = useRef(null);
 
+  useEffect(()=>{
+    fetch(`/api/gravatar?email=${user?.email}`)
+    .then((res) => res.json())
+    .then((data) => setEmailMd5(data.emailMd5));
+  },[]);
+
+  console.log('emailMd5', emailMd5);
   // close on click outside
   useEffect(() => {
     const clickHandler = ({ target }) => {
@@ -44,6 +54,7 @@ const DropdownUser = ({ user }) => {
     return () => document.removeEventListener('keydown', keyHandler);
   });
 
+
   return (
     <div className='relative'>
       <Link
@@ -60,16 +71,24 @@ const DropdownUser = ({ user }) => {
         </span>
 
         <span className='h-12 w-12 rounded-full'>
-          <Image
+          {user?.image && (
+            <Image
             width={112}
             height={112}
-            src={'/images/user/user-01.png'}
+            className="rounded-full w-80 h-80"
+            src={user?.image}
             style={{
               width: 'auto',
               height: 'auto',
             }}
             alt='User'
           />
+          )}
+          {!user?.image && emailMd5 && (
+            <div className='flex items-center justify-center w-12 h-12 rounded-full bg-gray-200 dark:bg-gray-700'>
+              <Avatar emailMd5={emailMd5} user={user} size={50} />
+            </div>
+          )}
         </span>
 
         <svg

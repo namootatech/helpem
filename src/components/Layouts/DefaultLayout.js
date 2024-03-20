@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Sidebar from "@/components/SideBar";
-import Header from "@/components/Header/dashboard";
+import Header from "@/components/header/dashboard";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import { connect } from "react-redux";
@@ -21,7 +21,31 @@ function DefaultLayout({
       }
       else if (user){
         const userObj = JSON.parse(user);
-        login(userObj);
+        console.log("User data", userObj);
+        const API_URL = process.env.NEXT_PUBLIC_API_URL + '/login';
+    console.log(API_URL);
+    fetch(API_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: user,
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        console.log(response);
+        if (response.error) {
+        } else {
+          console.log("You have successfully loggedin.");
+          login(response.data);
+
+          console.log("User data", response.data);
+        
+        }
+      })
+      .catch((error) => {
+        alert("Error:", error);
+      });
       }
     }
   }, [])

@@ -1,6 +1,6 @@
 import Layout from "@/components/layout";
 import { connect } from "react-redux";
-import buildArtifacts from '@/components/content/generator';
+import Artifacts from '@/components/content/generator';
 import { getThemeConfig } from "@/themes";
 
 export async function getStaticProps({ params }) {
@@ -27,7 +27,7 @@ function Page(props) {
     return (
         <Layout>
             <div className="container md:mt-4 md:px-16 px-4">
-                {page && buildArtifacts(page?.artifacts)}
+                {page && <Artifacts items={page?.artifacts} />}
             </div>
         </Layout>
     )

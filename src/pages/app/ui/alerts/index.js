@@ -2,7 +2,7 @@ import Breadcrumb from "@/components/Breadcrumbs/Breadcrumb";
 import { Metadata } from "next";
 import DefaultLayout from "@/components/Layouts/DefaultLayout";
 
-export const metadata: Metadata = {
+export const metadata = {
   title: "Next.js Alerts | TailAdmin - Next.js Dashboard Template",
   description:
     "This is Next.js Alerts page for TailAdmin - Next.js Tailwind CSS Admin Dashboard Template",

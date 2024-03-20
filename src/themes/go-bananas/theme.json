@@ -270,5 +270,113 @@
                 }
             ]
         }
+  ],
+  "defaultPages": [
+    {
+      "id": "subscribe",
+      "title": "Subscribe",
+      "artifacts": [
+        {
+          "type": "full-width-text-block",
+          "title": "Subscribe to Go Bananas",
+          "text": "Join us in our mission to spread joy and awareness about the positive impact of bananas. By subscribing to Go Bananas, you not only support banana-related initiatives but also participate in spreading the joy of bananas to communities around the world."
+        },
+        {
+          "type": "full-width-text-block",
+          "title": "Subscribe Now",
+          "text": "Ready to make a banana impact? Subscribe to Go Bananas today and become part of our community of banana enthusiasts, contributing to causes that matter."
+        },
+        {
+          "type": "full-width-text-block",
+          "title": "Your Banana Subscription",
+          "text": "By subscribing to Go Bananas, you receive joy-packed bananas and contribute to making the world a happier place. Your support goes beyond enjoying bananas; it spreads happiness to communities around the world."
+        }
+      ]
+    },
+    {
+      "id": "subscribe-return-without-first-payment-done",
+      "title": "Subscribe",
+      "artifacts": [
+        { "type": "space-above", "size": "10" },
+        {
+          "type": "full-width-text-block",
+          "title": "Subscribe to Go Bananas",
+          "text": "Join us in our mission to spread joy and awareness about the positive impact of bananas. By subscribing to Go Bananas, you not only support banana-related initiatives but also participate in spreading the joy of bananas to communities around the world."
+        },
+        {
+          "type": "full-width-text-block",
+          "title": "Subscribe Now",
+          "text": "Ready to make a banana impact? Subscribe to Go Bananas today and become part of our community of banana enthusiasts, contributing to causes that matter."
+        },
+        {
+          "type": "full-width-text-block",
+          "title": "Your Banana Subscription",
+          "text": "By subscribing to Go Bananas, you receive joy-packed bananas and contribute to making the world a happier place. Your support goes beyond enjoying bananas; it spreads happiness to communities around the world."
+        },
+        {
+          "type": "payfast-button",
+          "title": "Make Payment",
+          "url": "https://sandbox.payfast.co.za/eng/process?cmd=_paynow&receiver=17900794&item_name=Go%20Bananas%20Subscription&amount=100.00&return_url=https://go-bananas.co.za/subscribe-return-with-first-payment-done&cancel_url=https://go-bananas.co.za/subscribe-return-with-first-payment-failed"
+        },
+        { "type": "space-below", "size": "10" }
+      ]
+    },
+    {
+      "id": "subscribe-return-with-first-payment-done",
+      "title": "Subscribe",
+      "artifacts": [
+        { "type": "space-above", "size": "10"},
+        {
+            "type": "full-width-text-block",
+            "title": "Thank You",
+            "text": "Thank you for subscribing to Go Bananas. Your support goes a long way in spreading joy and awareness about the positive impact of bananas. We look forward to sharing the joy of bananas with you."
+          },
+        {
+          "type": "full-width-text-block",
+          "title": "Your Banana Subscription",
+          "text": "By subscribing to Go Bananas, you receive joy-packed bananas and contribute to making the world a happier place. Your support goes beyond enjoying bananas; it spreads happiness to communities around the world."
+        },
+        {
+          "type": "full-width-text-block",
+          "title": "Next Steps",
+          "text": "We will be in touch with you shortly to confirm your subscription and share more details about the joy-packed bananas you will receive. In the meantime, feel free to explore our website and learn more about our mission and the positive impact of bananas."
+        },
+        {
+            "type": "login-button",
+            "title": "Login to Your Account"
+        },
+        { "type": "space-below", "size": "10"}
+      ]
+    },
+    {
+      "id": "subscribe-return-with-first-payment-failed",
+      "title": "Subscribe",
+      "artifacts": [
+        {
+          "type": "full-width-text-block",
+          "title": "Subscribe to Go Bananas",
+          "text": "Join us in our mission to spread joy and awareness about the positive impact of bananas. By subscribing to Go Bananas, you not only support banana-related initiatives but also participate in spreading the joy of bananas to communities around the world."
+        },
+        {
+          "type": "full-width-text-block",
+          "title": "Subscribe Now",
+          "text": "Ready to make a banana impact? Subscribe to Go Bananas today and become part of our community of banana enthusiasts, contributing to causes that matter."
+        },
+        {
+          "type": "full-width-text-block",
+          "title": "Your Banana Subscription",
+          "text": "By subscribing to Go Bananas, you receive joy-packed bananas and contribute to making the world a better place"
+        },
+        {
+          "type": "full-width-text-block",
+          "title": "Payment Failed",
+          "text": "We're sorry, but your payment for the subscription failed. Please try again."
+        },
+        {
+          "type": "payfast-button",
+          "title": "Make Payment"
+                }
+            ]
+        }
     ]
 }
