@@ -24,19 +24,38 @@ const levelPrices = {
   GlobalImpactVisionary: 10000,
 };
 
+const formatCurrency = (amount) => {
+  return amount.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+};
+
 const PAYFAST_URL = process.env.NEXT_PUBLIC_PAYFAST_URL;
 const WEBSITE_URL = process.env.NEXT_PUBLIC_WEBSITE_URL;
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 const MERCHANT_ID = process.env.NEXT_PUBLIC_MERCHANT_ID;
 const MERCHANT_KEY = process.env.NEXT_PUBLIC_MERCHANT_KEY;
 
-const getPayFastData = (userData, subscriptionTier, selectedPartner, subscriptionId) => {
+const getPayFastData = (
+  userData,
+  subscriptionTier,
+  selectedPartner,
+  subscriptionId
+) => {
   const paymentId = uuidv4();
   let payfastData = {
     merchant_id: MERCHANT_ID,
     merchant_key: MERCHANT_KEY,
     return_url: `${WEBSITE_URL}/app?complete=true`,
-    cancel_url: `${WEBSITE_URL}/app?cancelled=true&subscriptionId=${subscriptionId}&userId=${userData._id}&subscriptionTier=${subscriptionTier}&amount=${levelPrices[subscriptionTier]}&firstName=${userData.firstName}&lastName=${userData.lastName}&email=${userData.email}&paymentMethod=${userData.paymentMethod}&agreeToTerms=${userData.agreeToTerms}&level=${keys(levelPrices).indexOf(subscriptionTier) + 1}${userData?.parent ? `&parent=${userData?.parent}&` :''}&partner=${selectedPartner.slug}`,
+    cancel_url: `${WEBSITE_URL}/app?cancelled=true&subscriptionId=${subscriptionId}&userId=${
+      userData._id
+    }&subscriptionTier=${subscriptionTier}&amount=${
+      levelPrices[subscriptionTier]
+    }&firstName=${userData.firstName}&lastName=${userData.lastName}&email=${
+      userData.email
+    }&paymentMethod=${userData.paymentMethod}&agreeToTerms=${
+      userData.agreeToTerms
+    }&level=${keys(levelPrices).indexOf(subscriptionTier) + 1}${
+      userData?.parent ? `&parent=${userData?.parent}&` : ''
+    }&partner=${selectedPartner.slug}`,
     notify_url: `${API_URL}/notify`,
     name_first: userData.firstName,
     name_last: userData.lastName,
@@ -54,22 +73,38 @@ const getPayFastData = (userData, subscriptionTier, selectedPartner, subscriptio
     subscription_notify_webhook: true,
     subscription_notify_buyer: true,
     custom_str1: userData?.parent ? userData?.parent : '',
-    custom_str2: userData?._id ? userData?._id: '',
-    custom_str3: subscriptionId  ? subscriptionId : '',
+    custom_str2: userData?._id ? userData?._id : '',
+    custom_str3: subscriptionId ? subscriptionId : '',
     custom_str4: selectedPartner.slug,
     custom_str5: subscriptionTier,
   };
 
   return payfastData;
-}
+};
 
-const getPayFastDataWithExistingToken = (userData, subscriptionTier, selectedPartner, subscriptionId, token) => {
+const getPayFastDataWithExistingToken = (
+  userData,
+  subscriptionTier,
+  selectedPartner,
+  subscriptionId,
+  token
+) => {
   const paymentId = uuidv4();
   let payfastData = {
     merchant_id: MERCHANT_ID,
     merchant_key: MERCHANT_KEY,
     return_url: `${WEBSITE_URL}/app?complete=true`,
-    cancel_url: `${WEBSITE_URL}/app?token=${token}&cancelled=true&subscriptionId=${subscriptionId}&userId=${userData._id}&subscriptionTier=${subscriptionTier}&amount=${levelPrices[subscriptionTier]}&firstName=${userData.firstName}&lastName=${userData.lastName}&email=${userData.email}&paymentMethod=${userData.paymentMethod}&agreeToTerms=${userData.agreeToTerms}&level=${keys(levelPrices).indexOf(subscriptionTier) + 1}${userData?.parent ? `&parent=${userData?.parent}&` :''}&partner=${selectedPartner.slug}`,
+    cancel_url: `${WEBSITE_URL}/app?token=${token}&cancelled=true&subscriptionId=${subscriptionId}&userId=${
+      userData._id
+    }&subscriptionTier=${subscriptionTier}&amount=${
+      levelPrices[subscriptionTier]
+    }&firstName=${userData.firstName}&lastName=${userData.lastName}&email=${
+      userData.email
+    }&paymentMethod=${userData.paymentMethod}&agreeToTerms=${
+      userData.agreeToTerms
+    }&level=${keys(levelPrices).indexOf(subscriptionTier) + 1}${
+      userData?.parent ? `&parent=${userData?.parent}&` : ''
+    }&partner=${selectedPartner.slug}`,
     notify_url: `${API_URL}/notify`,
     name_first: userData.firstName,
     name_last: userData.lastName,
@@ -87,14 +122,14 @@ const getPayFastDataWithExistingToken = (userData, subscriptionTier, selectedPar
     subscription_notify_webhook: true,
     subscription_notify_buyer: true,
     custom_str1: userData?.parent ? userData?.parent : '',
-    custom_str2: userData?._id ? userData?._id: '',
-    custom_str3: subscriptionId  ? subscriptionId : '',
+    custom_str2: userData?._id ? userData?._id : '',
+    custom_str3: subscriptionId ? subscriptionId : '',
     custom_str4: selectedPartner.slug,
     custom_str5: subscriptionTier,
     token: token,
   };
   return payfastData;
-}
+};
 
 const getPayFastRetryData = (userData) => {
   const paymentId = uuidv4();
@@ -102,7 +137,21 @@ const getPayFastRetryData = (userData) => {
     merchant_id: MERCHANT_ID,
     merchant_key: MERCHANT_KEY,
     return_url: `${WEBSITE_URL}/app?complete=true`,
-    cancel_url: `${WEBSITE_URL}/app?${userData?.token ? `token=${userData?.token}&` : ''}${userData?.subscriptionId ? `subscriptionId=${userData?.subscriptionId}&` : ''}cancelled=true&userId=${userData.userId}&firstName=${userData.firstName}&lastName=${userData.lastName}&email=${userData.email}&paymentMethod=${userData.paymentMethod}&agreeToTerms=${userData.agreeToTerms}&level=${keys(levelPrices).indexOf(userData.subscriptionTier) + 1}${userData?.parent ? `&parent=${userData?.parent}` :''}&partner=${userData?.partner.slug}`,
+    cancel_url: `${WEBSITE_URL}/app?${
+      userData?.token ? `token=${userData?.token}&` : ''
+    }${
+      userData?.subscriptionId
+        ? `subscriptionId=${userData?.subscriptionId}&`
+        : ''
+    }cancelled=true&userId=${userData.userId}&firstName=${
+      userData.firstName
+    }&lastName=${userData.lastName}&email=${userData.email}&paymentMethod=${
+      userData.paymentMethod
+    }&agreeToTerms=${userData.agreeToTerms}&level=${
+      keys(levelPrices).indexOf(userData.subscriptionTier) + 1
+    }${userData?.parent ? `&parent=${userData?.parent}` : ''}&partner=${
+      userData?.partner.slug
+    }`,
     notify_url: `${API_URL}/notify`,
     name_first: userData.firstName,
     name_last: userData.lastName,
@@ -120,13 +169,13 @@ const getPayFastRetryData = (userData) => {
     subscription_notify_webhook: true,
     subscription_notify_buyer: true,
     custom_str1: userData?.parent ? userData?.parent : '',
-    custom_str2: userData?.userId ? userData?.userId: '',
+    custom_str2: userData?.userId ? userData?.userId : '',
     custom_str3: userData?.subscriptionId ? userData?.subscriptionId : '',
     custom_str4: userData?.partner,
     custom_str5: userData?.subscriptionTier,
   };
   return payfastData;
-}
+};
 
 const ECommerce = ({ userData }) => {
   const params = useSearchParams();
@@ -135,7 +184,7 @@ const ECommerce = ({ userData }) => {
   for (const [key, value] of params.entries()) {
     payfastUserData[key] = value;
   }
-  payfastUserData = dissoc("cancelled", payfastUserData);
+  payfastUserData = dissoc('cancelled', payfastUserData);
   const paymentComplete = params.get('complete');
   const cancelled = params.get('cancelled');
 
@@ -143,9 +192,12 @@ const ECommerce = ({ userData }) => {
   const [showPaymentModal, setShowPaymentModal] = useState(false);
   const [showSubscriptionTierModal, setShowSubscriptionTierModal] =
     useState(false);
-  const [showCongratulationsModal, setShowCongratulationsModal] = useState(false);
-  const [showPaymentCompleteModal, setShowPaymentCompleteModal] = useState(false);
-  const [showPaymentCancelledModal, setShowPaymentCancelledModal] = useState(false);
+  const [showCongratulationsModal, setShowCongratulationsModal] =
+    useState(false);
+  const [showPaymentCompleteModal, setShowPaymentCompleteModal] =
+    useState(false);
+  const [showPaymentCancelledModal, setShowPaymentCancelledModal] =
+    useState(false);
   const [subscriptionTier, setSubscriptionTier] = useState('Nourisher');
   const [partners, setPartners] = useState([]);
   const [selectedPartner, setSelectedPartner] = useState(null);
@@ -154,10 +206,10 @@ const ECommerce = ({ userData }) => {
   const [paymentSubscription, setPaymentSubscription] = useState(null);
 
   useEffect(() => {
-    if(paymentComplete === "true") {
+    if (paymentComplete === 'true') {
       setShowPaymentCompleteModal(true);
     }
-    if(cancelled === "true") {
+    if (cancelled === 'true') {
       setShowPaymentCancelledModal(true);
     }
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/partners`)
@@ -167,15 +219,15 @@ const ECommerce = ({ userData }) => {
 
   useEffect(() => {
     if (userData?.user) {
-      console.log("setting defaults", userData)
+      console.log('setting defaults', userData);
       const selectedPartner = userData?.subscriptions[0]?.partner;
-      setSelectedPartner(selectedPartner)
-      const subscription = userData?.subscriptions[0]
+      setSelectedPartner(selectedPartner);
+      const subscription = userData?.subscriptions[0];
       const subscriptionTier = subscription?.subscriptionTier;
       setSubscriptionTier(subscriptionTier);
       setPaymentSubscription(subscription);
-    }},[userData])
-    
+    }
+  }, [userData]);
 
   const isSubscribedToPartner = (partner) => {
     return userData?.subscriptions?.some(
@@ -202,7 +254,7 @@ const ECommerce = ({ userData }) => {
       subscriptionTier,
       level: keys(levelPrices).indexOf(subscriptionTier) + 1,
       amount: levelPrices[subscriptionTier],
-    }
+    };
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/subscriptions/add`, {
       method: 'POST',
       headers: {
@@ -212,50 +264,84 @@ const ECommerce = ({ userData }) => {
     })
       .then((response) => response.json())
       .then((data) => {
-        setSubscription(data?.subscription?.insertedId)
+        setSubscription(data?.subscription?.insertedId);
         setShowCongratulationsModal(true);
         setLoading(false);
       })
       .catch((error) => {
         throw new Error('Error:', error);
       });
-    
   };
 
   const makeFirstPayment = () => {
-    const payfastData = getPayFastData(userData.user, subscriptionTier, selectedPartner, subscription);
+    const payfastData = getPayFastData(
+      userData.user,
+      subscriptionTier,
+      selectedPartner,
+      subscription
+    );
     console.log('payfastData', payfastData);
     postToURL(PAYFAST_URL, payfastData);
-  }
+  };
 
   const handleMakeSubscriptionPayment = () => {
     setLoading(true);
-    const transaction = userData.transactions.find(transaction => transaction.custom_str3 === paymentSubscription._id);
+    const transaction = userData.transactions.find(
+      (transaction) => transaction.custom_str3 === paymentSubscription._id
+    );
     const subscriptionToken = transaction?.token;
-    if(subscriptionToken){
-      const payfastData = 
-        getPayFastDataWithExistingToken(
-          userData.user, 
-          subscriptionTier, 
-          selectedPartner, 
-          paymentSubscription._id, 
-          subscriptionToken);
-        console.log('payfastData', payfastData);
-      postToURL(PAYFAST_URL, payfastData);
-    } else {
-      throw new Error("No subscription token found for subscription")  
-    }
-  }
+    const payfastData = getPayFastDataWithExistingToken(
+      userData.user,
+      subscriptionTier,
+      selectedPartner,
+      paymentSubscription._id,
+      subscriptionToken
+    );
+    console.log('payfastData', payfastData);
+    postToURL(PAYFAST_URL, payfastData);
+  };
 
   const retryPayment = () => {
     const payfastData = getPayFastRetryData(payfastUserData);
     console.log('payfastData', payfastData);
     postToURL(PAYFAST_URL, payfastData);
-  }
+  };
 
+  const balance = userData?.affiliateSubscriptions ? userData.affiliateSubscriptions.reduce((acc, subscription) => acc + subscription?.splits?.find(s => s.beneficiary.id === userData._id)?.amount, 0) : 0;
+  const subscriberGrossAmount = userData?.affiliateSubscriptions ? userData.affiliateSubscriptions.reduce((acc, subscription) => acc + subscription.amount, 0) : 0;
   return (
     <>
       <div className='mt-4 grid grid-cols-1 gap-4 md:mt-6 md:gap-6 2xl:mt-7.5 2xl:gap-7.5'>
+        <div className='flex flex-row w-full col-span-12'>
+          <div className='max-w-xs bg-white shadow-lg rounded-lg overflow-hidden mr-2'>
+            <div className='px-4 py-5 sm:p-6'>
+              <div className='flex items-center'>
+                
+                <div className='ml-5'>
+                  <div className='text-xl font-semibold text-gray-900'>
+                    R{" "}{formatCurrency(subscriberGrossAmount)}
+                  </div>
+                  <div className='text-gray-600'>Subscriber Gross</div>
+                  <small className='text-xs'>The total amount paid by your subscribers</small>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className='max-w-xs bg-white shadow-lg rounded-lg overflow-hidden mr-2'>
+            <div className='px-4 py-5 sm:p-6'>
+              <div className='flex items-center'>
+                
+                <div className='ml-5'>
+                  <div className='text-xl font-semibold text-gray-900'>
+                    R{" "}{formatCurrency(balance)}
+                  </div>
+                  <div className='text-gray-600'>Subscription Share</div>
+                  <small className='text-xs'>The amount due to you from your subscribers</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         <div class='flex flex-row'>
           <button
             onClick={() => setShowSubscriptionModal(true)}
@@ -386,41 +472,46 @@ const ECommerce = ({ userData }) => {
           title='Make a payment'
         >
           <div>
-          <div className='grid grid-cols-1 gap-2 bg-gray-50 border  p-4 flex items-center justify-center rounded rounded-lg shadow-lg my-2'>
-            <h1 className='text-xl font-bold'>Select subscription</h1>
-            <p className='text-sm my-2'>For which subscription would you like to make a payment for?</p>
-            <select
-              id='subscription'
-              name='subscription'
-              className='rounded border p-2 w-full my-4'
-              onChange={(e) => {
-                const selectedPartner = userData.subscriptions.find(
-                  (subscription) => subscription._id === e.target.value
-                )
-                setSelectedPartner(selectedPartner.partner)
-                const subscription = userData.subscriptions.find(
-                  (subscription) => subscription._id === e.target.value
-                )
-                const subscriptionTier = subscription.subscriptionTier;
-                setSubscriptionTier(subscriptionTier);
-                setPaymentSubscription(subscription);
-              }}
-            >
-              {userData?.subscriptions?.map((subscription) => (
-                <option
-                  key={subscription._id}
-                  value={subscription._id}
-                  selected={paymentSubscription?._id === subscription._id}
-                >
-                  {subscription.partner.name} (R{subscription.amount}/month)
-                </option>
-              ))}
-            </select>
+            <div className='grid grid-cols-1 gap-2 bg-gray-50 border  p-4 flex items-center justify-center rounded rounded-lg shadow-lg my-2'>
+              <h1 className='text-xl font-bold'>Select subscription</h1>
+              <p className='text-sm my-2'>
+                For which subscription would you like to make a payment for?
+              </p>
+              <select
+                id='subscription'
+                name='subscription'
+                className='rounded border p-2 w-full my-4'
+                onChange={(e) => {
+                  const selectedPartner = userData.subscriptions.find(
+                    (subscription) => subscription._id === e.target.value
+                  );
+                  setSelectedPartner(selectedPartner.partner);
+                  const subscription = userData.subscriptions.find(
+                    (subscription) => subscription._id === e.target.value
+                  );
+                  const subscriptionTier = subscription.subscriptionTier;
+                  setSubscriptionTier(subscriptionTier);
+                  setPaymentSubscription(subscription);
+                }}
+              >
+                {userData?.subscriptions?.map((subscription) => (
+                  <option
+                    key={subscription._id}
+                    value={subscription._id}
+                    selected={paymentSubscription?._id === subscription._id}
+                  >
+                    {subscription.partner.name} (R{subscription.amount}/month)
+                  </option>
+                ))}
+              </select>
 
-            <button onClick={handleMakeSubscriptionPayment} class='my-4 rounded rounded-md text-gray-100 bg-red-800 flex items-center justify-center me-2 mb-2 p-2'>
-              Pay
-            </button>
-          </div>
+              <button
+                onClick={handleMakeSubscriptionPayment}
+                class='my-4 rounded rounded-md text-gray-100 bg-red-800 flex items-center justify-center me-2 mb-2 p-2'
+              >
+                Pay
+              </button>
+            </div>
           </div>
         </FreeModal>
         <FreeModal
@@ -471,12 +562,12 @@ const ECommerce = ({ userData }) => {
             <h1 className='text-sm font-bold'>Congratulations</h1>
             <p>You have successfully subscribed to {selectedPartner?.name}</p>
             <p>
-              You are now a member of {selectedPartner?.name}. You can now
-              make a positive impact in the world through {selectedPartner?.name}
-
+              You are now a member of {selectedPartner?.name}. You can now make
+              a positive impact in the world through {selectedPartner?.name}
             </p>
             <p>
-              You can now make your first payment to {selectedPartner?.name} by clicking the button below
+              You can now make your first payment to {selectedPartner?.name} by
+              clicking the button below
             </p>
             <button
               onClick={() => makeFirstPayment()}
@@ -486,7 +577,11 @@ const ECommerce = ({ userData }) => {
             </button>
           </div>
         </FreeModal>
-        <FreeModal showModal={showPaymentCompleteModal} setShowModal={setShowPaymentCompleteModal} title='Payment Complete'>
+        <FreeModal
+          showModal={showPaymentCompleteModal}
+          setShowModal={setShowPaymentCompleteModal}
+          title='Payment Complete'
+        >
           <div className='grid grid-cols-1 gap-2 bg-gray-50 border  p-4 flex items-center justify-center rounded rounded-lg shadow-lg my-2'>
             {/* Create a round div with an svg checkmark inside */}
             <div className='w-16 h-16 rounded-full bg-green-500 flex items-center justify-center'>
@@ -503,13 +598,17 @@ const ECommerce = ({ userData }) => {
                 />
               </svg>
             </div>
-            
+
             <h1 className='text-sm font-bold'>Payment Complete</h1>
             <p>Your payment to {selectedPartner?.name} was successful</p>
             <p>Thank you for your payment</p>
           </div>
         </FreeModal>
-        <FreeModal showModal={showPaymentCancelledModal} setShowModal={setShowPaymentCancelledModal} title='Payment Failure'>
+        <FreeModal
+          showModal={showPaymentCancelledModal}
+          setShowModal={setShowPaymentCancelledModal}
+          title='Payment Failure'
+        >
           <div className='grid grid-cols-1 gap-2 bg-gray-50 border  p-4 flex items-center justify-center rounded rounded-lg shadow-lg my-2'>
             {/* Create a round div with an svg a cross mark inside */}
             <div className='w-16 h-16 rounded-full bg-red-500 flex items-center justify-center'>
@@ -525,17 +624,19 @@ const ECommerce = ({ userData }) => {
                   fill='white'
                 />
               </svg>
-              </div>
+            </div>
             <h1 className='text-sm font-bold'>Payment Failure</h1>
             <p>Your payment to {selectedPartner?.name} was unsuccessful</p>
             <p>Please try again</p>
-            <button onClick={() => retryPayment()} class='rounded rounded-md text-gray-100 bg-red-800 flex items-center justify-center me-2 mb-2 p-2'>
+            <button
+              onClick={() => retryPayment()}
+              class='rounded rounded-md text-gray-100 bg-red-800 flex items-center justify-center me-2 mb-2 p-2'
+            >
               Retry
             </button>
           </div>
         </FreeModal>
 
-        
         <div className='col-span-12'>
           <TableOne />
         </div>
@@ -549,10 +650,11 @@ const ECommerce = ({ userData }) => {
 
 const mapStateToProps = (state) => ({
   userData: pipe(
-    dissocPath(["user", "password"]),
-    dissocPath(["user", "confirmPassword"]),
-    dissocPath(["user", "hash"]),
+    dissocPath(['user', 'password']),
+    dissocPath(['user', 'confirmPassword']),
+    dissocPath(['user', 'hash'])
   )(state.auth),
+  affiliateSubscriptions: state.affiliateSubscriptions,
 });
 
 export default connect(mapStateToProps, null)(ECommerce);
