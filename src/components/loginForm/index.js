@@ -48,9 +48,9 @@ const SubscriptionForm = ({ login }) => {
     const API_URL = process.env.NEXT_PUBLIC_API_URL + '/login';
     console.log(API_URL);
     fetch(API_URL, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(formData),
     })
@@ -62,18 +62,18 @@ const SubscriptionForm = ({ login }) => {
         if (response.error) {
           setEmailError(response.message);
         } else {
-          console.log("You have successfully loggedin.");
+          console.log('You have successfully loggedin.');
           login(response.data);
 
-          console.log("User data", response.data);
-        
-          setCookie("user", JSON.stringify(response.data.user));
-          router.push("/app");
+          console.log('User data', response.data);
+
+          setCookie('user', JSON.stringify(response.data.user));
+          router.push('/app');
         }
       })
       .catch((error) => {
         setLoading(false);
-        setEmailError("Error:", error);
+        setEmailError('Error:', error);
       });
   };
 
@@ -135,7 +135,7 @@ const SubscriptionForm = ({ login }) => {
               htmlFor='remember'
               className='ml-2 md:text-xl text-sm font-medium text-gray-900 dark:text-gray-300'
             >
-              Remember me
+              Keep me logged in
             </label>
           </div>
           <a
