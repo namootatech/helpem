@@ -1,7 +1,10 @@
 import clientPromise from '@/util/mongo';
 import { ObjectId } from 'mongodb';
 const { App } = require('@slack/bolt');
-
+const app = new App({
+  signingSecret: process.env.NEXT_PUBLIC_CLIENT_SIGNING_SECRET,
+  token: process.env.NEXT_PUBLIC_SLACK_BOT_TOKEN,
+});
 const isDevEnvironment = process.env.NODE_ENV === 'development';
 
 export default async function handler(req, res) {
