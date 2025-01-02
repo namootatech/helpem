@@ -45,12 +45,12 @@ const SubscriptionForm = ({ login }) => {
       setEmailError('');
     }
 
-    const API_URL = process.env.NEXT_PUBLIC_API_URL + '/login';
+    const API_URL = 'https://helpem-api.onrender.com/api' + '/login';
     console.log(API_URL);
     fetch(API_URL, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(formData),
     })
@@ -62,18 +62,18 @@ const SubscriptionForm = ({ login }) => {
         if (response.error) {
           setEmailError(response.message);
         } else {
-          console.log("You have successfully loggedin.");
+          console.log('You have successfully loggedin.');
           login(response.data);
 
-          console.log("User data", response.data);
-        
-          setCookie("user", JSON.stringify(response.data.user));
-          router.push("/app");
+          console.log('User data', response.data);
+
+          setCookie('user', JSON.stringify(response.data.user));
+          router.push('/app');
         }
       })
       .catch((error) => {
         setLoading(false);
-        setEmailError("Error:", error);
+        setEmailError('Error:', error);
       });
   };
 
