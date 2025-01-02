@@ -63,6 +63,7 @@ const SubscriptionForm = ({ user, theme }) => {
   };
 
   const handleSubmit = (e) => {
+    console.log('Posting to', API_URL);
     e.preventDefault();
     console.log('saving formData', formData);
     setLoading(true);
@@ -142,6 +143,7 @@ const SubscriptionForm = ({ user, theme }) => {
     }
   }, [theme]);
 
+  console.log('API URL', API_URL);
   return (
     <div className='md:w-9/12 p-8 mx-auto bg-white rounded-lg shadow-md'>
       <h1 className='text-2xl font-semibold mb-4 text-4xl'>
