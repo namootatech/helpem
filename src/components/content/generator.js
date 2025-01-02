@@ -62,6 +62,141 @@ const articleBuilder = ({ config }) => {
   );
 };
 
+export const FeatureSection = ({ features }) => (
+  <div className='bg-gray-100 py-12'>
+    <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
+      <div className='lg:text-center'>
+        <h2 className='text-base text-indigo-600 font-semibold tracking-wide uppercase'>
+          Features
+        </h2>
+        <p className='mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl'>
+          How Helpem Works
+        </p>
+        <p className='mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto'>
+          Discover the key features that make Helpem the perfect platform for
+          affiliate marketing and donation collection.
+        </p>
+      </div>
+
+      <div className='mt-10'>
+        <dl className='space-y-10 md:space-y-0 md:grid md:grid-cols-3 md:gap-x-8 md:gap-y-10'>
+          {features.map((feature) => (
+            <div key={feature.name} className='relative'>
+              <dt>
+                <div className='absolute flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white'>
+                  {feature.icon}
+                </div>
+                <p className='ml-16 text-lg leading-6 font-medium text-gray-900'>
+                  {feature.name}
+                </p>
+              </dt>
+              <dd className='mt-2 ml-16 text-base text-gray-500'>
+                {feature.description}
+              </dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </div>
+  </div>
+);
+
+export const TestimonialSection = ({ testimonials }) => (
+  <div className='bg-white py-16 lg:py-24'>
+    <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
+      <div className='lg:text-center'>
+        <h2 className='text-base text-indigo-600 font-semibold tracking-wide uppercase'>
+          Testimonials
+        </h2>
+        <p className='mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl'>
+          What Our Users Say
+        </p>
+      </div>
+      <div className='mt-10'>
+        <div className='space-y-10 md:space-y-0 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-10'>
+          {testimonials.map((testimonial, index) => (
+            <div key={index} className='bg-gray-100 rounded-lg p-6 shadow-md'>
+              <p className='text-gray-600 italic mb-4'>"{testimonial.quote}"</p>
+              <div className='flex items-center'>
+                <img
+                  className='h-12 w-12 rounded-full mr-4'
+                  src={testimonial.avatar}
+                  alt={testimonial.name}
+                />
+                <div>
+                  <p className='text-gray-900 font-semibold'>
+                    {testimonial.name}
+                  </p>
+                  <p className='text-gray-600'>{testimonial.title}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+);
+
+export const PricingSection = ({ plans }) => (
+  <div className='bg-gray-100 py-12'>
+    <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
+      <div className='lg:text-center'>
+        <h2 className='text-base text-indigo-600 font-semibold tracking-wide uppercase'>
+          Pricing
+        </h2>
+        <p className='mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl'>
+          Choose the Right Plan for You
+        </p>
+      </div>
+      <div className='mt-10 space-y-12 lg:space-y-0 lg:grid lg:grid-cols-3 lg:gap-x-8'>
+        {plans.map((plan) => (
+          <div
+            key={plan.name}
+            className='relative p-8 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col'
+          >
+            <div className='flex-1'>
+              <h3 className='text-xl font-semibold text-gray-900'>
+                {plan.name}
+              </h3>
+              {plan.mostPopular && (
+                <p className='absolute top-0 py-1.5 px-4 bg-indigo-500 text-white rounded-full transform -translate-y-1/2'>
+                  Most popular
+                </p>
+              )}
+              <p className='mt-4 flex items-baseline text-gray-900'>
+                <span className='text-5xl font-extrabold tracking-tight'>
+                  ${plan.price}
+                </span>
+                <span className='ml-1 text-xl font-semibold'>/month</span>
+              </p>
+              <p className='mt-6 text-gray-500'>{plan.description}</p>
+              <ul className='mt-6 space-y-6'>
+                {plan.features.map((feature) => (
+                  <li key={feature} className='flex'>
+                    <span className='text-indigo-500 mr-3'>✓</span>
+                    <span className='text-gray-500'>{feature}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <a
+              href='#'
+              className={`mt-8 block w-full py-3 px-6 border border-transparent rounded-md text-center font-medium ${
+                plan.mostPopular
+                  ? 'bg-indigo-500 text-white hover:bg-indigo-600'
+                  : 'bg-indigo-50 text-indigo-700 hover:bg-indigo-100'
+              }`}
+            >
+              Get started
+            </a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+);
+
 const spaBuilder = ({ config }) => {
   return (
     <div
